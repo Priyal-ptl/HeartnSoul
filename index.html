@@ -11,18 +11,25 @@
       --green: #1e8449; --green-bg: #eafaf1;
       --amber: #b7770d; --amber-bg: #fef9e7;
       --blue: #1a5276; --blue-bg: #eaf4fb;
-      --alert-bg: #fdedec; --radius: 16px; --radius-sm: 10px;
+      --purple: #6c3483; --purple-bg: #f5eef8;
+      --alert-bg: #fdedec;
+      --phase1: #1a5276; --phase1-bg: #eaf4fb;
+      --phase2: #1e8449; --phase2-bg: #eafaf1;
+      --phase3: #6c3483; --phase3-bg: #f5eef8;
+      --radius: 16px; --radius-sm: 10px;
       --shadow: 0 2px 16px rgba(0,0,0,0.08);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
-      font-family: -apple-system, 'Segoe UI', Arial, sans-serif;
+      font-family: -apple-system, "Segoe UI", Arial, sans-serif;
       background: var(--red-pale); color: var(--text);
       font-size: 18px; line-height: 1.5;
       max-width: 480px; margin: 0 auto; min-height: 100vh; padding-bottom: 100px;
     }
     .screen { display: none; }
     .screen.active { display: block; }
+
+    /* HEADER */
     .header {
       background: var(--red); color: white;
       padding: 18px 20px 14px; position: sticky; top: 0; z-index: 100;
@@ -33,20 +40,25 @@
     .btn-speak {
       background: rgba(255,255,255,0.22); border: none; color: white;
       border-radius: 30px; padding: 9px 16px; font-size: 15px; font-weight: 700;
-      cursor: pointer; font-family: inherit; flex-shrink: 0;
+      cursor: pointer; font-family: inherit; flex-shrink: 0; white-space: nowrap;
     }
+    .btn-speak:active { opacity: 0.7; }
     .btn-back {
       background: none; border: none; color: white;
       font-size: 18px; font-weight: 700; cursor: pointer; font-family: inherit; padding: 4px 12px 4px 0;
     }
+
+    /* WEATHER BAR */
     .weather-bar {
       background: var(--white); border-bottom: 1px solid var(--border);
       padding: 12px 20px; display: flex; align-items: center; gap: 10px;
       font-size: 16px; color: var(--muted);
     }
+
+    /* HOME CARDS */
     .section-label {
-      font-size: 13px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.06em; color: var(--muted); padding: 18px 20px 8px;
+      font-size: 13px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.07em; color: var(--muted); padding: 18px 20px 8px;
     }
     .event-card {
       background: var(--white); border-radius: var(--radius);
@@ -59,70 +71,157 @@
       position: absolute; left: 0; top: 0; bottom: 0;
       width: 6px; border-radius: 14px 0 0 14px;
     }
-    .event-title { font-size: 20px; font-weight: 800; line-height: 1.25; margin-bottom: 8px; }
-    .event-meta { color: var(--muted); font-size: 16px; }
-    .event-meta-row { display: flex; align-items: center; gap: 7px; margin-bottom: 4px; }
+    .event-title { font-size: 22px; font-weight: 900; line-height: 1.2; margin-bottom: 10px; }
+    .event-date-line {
+      font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 3px;
+    }
+    .event-time-line {
+      font-size: 17px; font-weight: 700; color: var(--red); margin-bottom: 3px;
+    }
+    .event-location-line {
+      font-size: 16px; color: var(--muted); font-weight: 500;
+    }
     .alert-chip {
       display: inline-flex; align-items: center; gap: 5px;
       background: var(--alert-bg); color: var(--red);
-      border-radius: 20px; padding: 5px 12px; font-size: 14px; font-weight: 700; margin-top: 10px;
+      border-radius: 20px; padding: 5px 12px; font-size: 14px; font-weight: 800; margin-top: 10px;
     }
     .chevron { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: #ccc; font-size: 22px; }
-    .detail-content { padding-bottom: 120px; }
+
+    /* DETAIL HERO */
+    .detail-hero { padding: 20px 20px 6px; }
+    .detail-title { font-size: 28px; font-weight: 900; line-height: 1.2; margin-bottom: 14px; }
+    .detail-date { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+    .detail-time { font-size: 19px; font-weight: 800; color: var(--red); margin-bottom: 4px; }
+    .detail-duration { font-size: 16px; color: var(--muted); font-weight: 600; }
+
+    /* ALERT */
     .alert-banner { background: var(--alert-bg); border-left: 5px solid var(--red); padding: 18px 20px; }
-    .alert-title { font-size: 18px; font-weight: 800; color: var(--red); margin-bottom: 6px; }
-    .alert-msg { font-size: 17px; margin-bottom: 10px; }
+    .alert-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .alert-title { font-size: 18px; font-weight: 800; color: var(--red); }
+    .alert-msg { font-size: 17px; margin-bottom: 8px; }
     .alert-fix { font-size: 16px; color: var(--green); font-weight: 700; }
-    .detail-hero { padding: 20px 20px 0; }
-    .detail-title { font-size: 28px; font-weight: 800; line-height: 1.2; margin-bottom: 14px; }
-    .pills { display: flex; flex-wrap: wrap; gap: 8px; }
-    .pill { background: var(--red-light); color: var(--red); border-radius: 20px; padding: 6px 14px; font-size: 15px; font-weight: 700; }
-    .card-section { background: var(--white); border-radius: var(--radius); margin: 14px 16px 0; overflow: hidden; box-shadow: var(--shadow); }
-    .card-head {
-      padding: 14px 18px; font-size: 13px; font-weight: 800;
-      text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted);
-      border-bottom: 1px solid var(--border);
+
+    /* PHASE SECTIONS */
+    .phase {
+      margin: 14px 16px 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
     }
-    .card-body { padding: 16px 18px; }
-    .venue-photos {
-      display: flex; gap: 10px; overflow-x: auto;
-      padding: 16px 18px 10px; -webkit-overflow-scrolling: touch;
+    .phase-header {
+      padding: 14px 18px;
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer;
     }
+    .phase-header-left { display: flex; align-items: center; gap: 12px; }
+    .phase-icon { font-size: 26px; }
+    .phase-title { font-size: 17px; font-weight: 800; }
+    .phase-subtitle { font-size: 14px; opacity: 0.8; margin-top: 1px; }
+    .phase-controls { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .phase-chevron { font-size: 18px; transition: transform 0.2s; color: inherit; opacity: 0.7; }
+    .phase-chevron.open { transform: rotate(90deg); }
+    .phase-body { display: none; background: var(--white); }
+    .phase-body.open { display: block; }
+
+    .phase-1 .phase-header { background: var(--phase1-bg); color: var(--phase1); }
+    .phase-2 .phase-header { background: var(--phase2-bg); color: var(--phase2); }
+    .phase-3 .phase-header { background: var(--phase3-bg); color: var(--phase3); }
+
+    /* SECTION INSIDE PHASE */
+    .subsection { padding: 16px 18px; border-bottom: 1px solid var(--border); }
+    .subsection:last-child { border-bottom: none; }
+    .subsection-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .subsection-title { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+    .btn-speak-sm {
+      background: var(--red-light); border: none; color: var(--red);
+      border-radius: 20px; padding: 5px 12px; font-size: 13px; font-weight: 800;
+      cursor: pointer; font-family: inherit; white-space: nowrap; flex-shrink: 0;
+    }
+    .btn-speak-sm:active { opacity: 0.7; }
+
+    /* DOCUMENT LIST */
+    .doc-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 10px 0; border-bottom: 1px solid var(--border);
+    }
+    .doc-item:last-child { border-bottom: none; }
+    .doc-check {
+      width: 26px; height: 26px; border-radius: 6px;
+      border: 2.5px solid var(--border); flex-shrink: 0; margin-top: 2px;
+      cursor: pointer; background: white;
+      display: flex; align-items: center; justify-content: center; font-size: 16px;
+    }
+    .doc-check.checked { background: var(--green); border-color: var(--green); color: white; }
+    .doc-text { font-size: 17px; line-height: 1.4; font-weight: 600; }
+
+    /* JOURNEY */
+    .journey-tip {
+      background: var(--amber-bg); color: var(--amber);
+      border-radius: var(--radius-sm); padding: 12px 14px;
+      font-size: 16px; font-weight: 700; margin-bottom: 14px;
+    }
+
+    /* VENUE PHOTOS */
+    .venue-photos { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; -webkit-overflow-scrolling: touch; }
     .venue-photos::-webkit-scrollbar { display: none; }
-    .venue-photo { width: 230px; height: 148px; object-fit: cover; border-radius: 12px; flex-shrink: 0; background: var(--border); }
-    .photo-caption { font-size: 13px; color: var(--muted); padding: 0 18px 6px; font-style: italic; }
-    .loc-name { font-size: 19px; font-weight: 800; margin-bottom: 4px; }
-    .loc-address { font-size: 16px; color: var(--muted); margin-bottom: 10px; }
-    .loc-floor { font-size: 16px; background: var(--amber-bg); color: var(--amber); border-radius: var(--radius-sm); padding: 10px 14px; font-weight: 600; }
+    .venue-photo { width: 220px; height: 140px; object-fit: cover; border-radius: 10px; flex-shrink: 0; background: var(--border); }
+    .photo-caption { font-size: 13px; color: var(--muted); font-style: italic; margin-top: 6px; }
+
+    /* TRANSPORT */
     .transport-toggle { display: flex; gap: 10px; margin-bottom: 16px; }
     .t-btn {
-      flex: 1; padding: 14px 8px; border-radius: var(--radius-sm);
+      flex: 1; padding: 12px 8px; border-radius: var(--radius-sm);
       border: 2.5px solid var(--border); background: var(--white);
       font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit;
-      color: var(--muted); text-align: center;
-      display: flex; flex-direction: column; align-items: center; gap: 5px;
+      color: var(--muted); display: flex; flex-direction: column; align-items: center; gap: 4px;
     }
-    .t-btn .ti { font-size: 28px; }
-    .t-btn.active { border-color: var(--red); background: var(--red-light); color: var(--red); }
+    .t-btn .ti { font-size: 26px; }
+    .t-btn.active { border-color: var(--phase1); background: var(--phase1-bg); color: var(--phase1); }
     .t-panel { display: none; }
     .t-panel.active { display: block; }
-    .route-group { margin-bottom: 18px; }
+    .route-group { margin-bottom: 16px; }
     .route-group:last-child { margin-bottom: 0; }
     .route-label { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 10px; }
-    .route-step { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .route-step { display: flex; gap: 12px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--border); }
     .route-step:last-child { border-bottom: none; }
     .step-num {
-      background: var(--red); color: white; width: 28px; height: 28px;
+      background: var(--phase1); color: white; width: 26px; height: 26px;
       border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      font-size: 14px; font-weight: 800; flex-shrink: 0; margin-top: 2px;
+      font-size: 13px; font-weight: 800; flex-shrink: 0; margin-top: 3px;
     }
     .step-text { font-size: 16px; line-height: 1.5; }
-    .route-divider { border: none; border-top: 2px dashed #e8e0dc; margin: 16px 0; }
-    .wx-row { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
-    .wx-icon { font-size: 52px; }
-    .wx-temp { font-size: 34px; font-weight: 800; line-height: 1; }
+    .route-divider { border: none; border-top: 2px dashed var(--border); margin: 14px 0; }
+
+    /* ARRIVAL INFO */
+    .info-item { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .info-item:last-child { border-bottom: none; }
+    .info-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+    .info-text { font-size: 17px; line-height: 1.45; }
+    .info-label { font-size: 13px; font-weight: 800; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+
+    /* ACTION ITEMS */
+    .action-item {
+      display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border);
+    }
+    .action-item:last-child { border-bottom: none; }
+    .action-check {
+      width: 26px; height: 26px; border-radius: 50%;
+      border: 2.5px solid var(--border); flex-shrink: 0; margin-top: 2px;
+      cursor: pointer; background: white;
+      display: flex; align-items: center; justify-content: center; font-size: 14px;
+    }
+    .action-check.checked { background: var(--purple); border-color: var(--purple); color: white; }
+    .action-text { font-size: 17px; line-height: 1.4; font-weight: 600; }
+
+    /* WEATHER */
+    .wx-row { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+    .wx-icon { font-size: 48px; }
+    .wx-temp { font-size: 32px; font-weight: 800; line-height: 1; }
     .wx-desc { font-size: 16px; color: var(--muted); margin-top: 3px; }
-    .wx-tip { background: var(--amber-bg); color: var(--amber); border-radius: var(--radius-sm); padding: 12px 14px; font-size: 16px; font-weight: 700; }
+    .wx-tip { background: var(--amber-bg); color: var(--amber); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 16px; font-weight: 700; }
+
+    /* BIG BUTTONS */
     .btn-action {
       display: flex; align-items: center; justify-content: center; gap: 10px;
       width: 100%; padding: 16px; border-radius: var(--radius-sm); border: none;
@@ -133,18 +232,24 @@
     .btn-maps { background: #4285f4; }
     .btn-uber { background: #000; }
     .btn-zoom { background: #2d8cff; }
+    .btn-call { background: var(--green); }
     .btn-gcal { background: var(--green); }
     .btn-ics { background: var(--blue); }
-    .btn-call { background: #27ae60; }
-    .notes-text { font-size: 17px; line-height: 1.65; }
+
+    /* ONLINE */
     .zoom-id { font-family: monospace; font-size: 26px; font-weight: 800; letter-spacing: 3px; background: var(--blue-bg); color: var(--blue); padding: 12px 20px; border-radius: var(--radius-sm); margin: 8px 0; display: inline-block; }
-    .contact-row { display: flex; align-items: center; gap: 12px; font-size: 17px; }
+
+    /* STICKY BOTTOM */
     .sticky-bottom {
       position: fixed; bottom: 0; left: 0; right: 0;
       max-width: 480px; margin: 0 auto;
       background: var(--white); border-top: 1px solid var(--border);
       padding: 12px 16px; z-index: 200;
     }
+
+    /* NOTES */
+    .notes-text { font-size: 17px; line-height: 1.65; }
+    .contact-row { display: flex; align-items: center; gap: 12px; font-size: 17px; }
   </style>
 </head>
 <body>
@@ -174,7 +279,7 @@
       <button class="btn-speak" id="detail-speak-btn">🔊 Read aloud</button>
     </div>
   </div>
-  <div class="detail-content" id="detail-content"></div>
+  <div id="detail-content" style="padding-bottom:20px;"></div>
   <div class="sticky-bottom" id="sticky-cal"></div>
 </div>
 
@@ -189,13 +294,14 @@ var EVENTS = [
     duration: "45 minutes",
     typeColor: "#e74c3c",
     online: false,
+    isPhone: false,
     location: {
       name: "St Thomas Hospital",
       address: "Westminster Bridge Rd, London SE1 7EH",
       floor: "Go to the Main Entrance. Ask at Reception for the Health Check clinic.",
       photos: [
-        { url: "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=600&q=80", caption: "Main entrance" },
-        { url: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80", caption: "Outside the building" }
+        { url: "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=600&q=80", caption: "Main entrance of St Thomas Hospital" },
+        { url: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80", caption: "Outside view of the building" }
       ],
       googleMaps: "https://maps.google.com/?q=St+Thomas+Hospital+London+SE1+7EH",
       uber: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=Westminster%20Bridge%20Rd%20London%20SE1%207EH&dropoff[nickname]=St%20Thomas%20Hospital",
@@ -204,14 +310,24 @@ var EVENTS = [
         { icon: "🚌", label: "Bus", steps: ["Take bus 12, 53 or 148", "Get off at Westminster Bridge Road stop", "The hospital entrance is right there"] }
       ],
       privateRoutes: [
-        { icon: "🚗", label: "Drive", steps: ["Head towards Westminster Bridge", "Postcode for sat nav: SE1 7EH", "Parking at St Thomas car park"] },
+        { icon: "🚗", label: "Drive", steps: ["Head towards Westminster Bridge", "Postcode for sat nav: SE1 7EH", "Parking at St Thomas car park on site"] },
         { icon: "🚕", label: "Uber", steps: ["Tap the Uber button below", "It will take you straight to St Thomas Hospital"] }
       ]
     },
     contact: { name: "Dr Sarah Williams", detail: "020 7188 7188" },
-    notes: "Please bring your NHS card and a list of any medicines you take. You will have a blood pressure check and a short chat with the doctor. It is friendly and relaxed.",
+    weather: { temp: "17°C", description: "Cloudy with rain showers", advice: "Bring an umbrella. Wear a warm layer.", icon: "🌧️" },
     alert: { title: "Room has changed", message: "Your appointment has moved from Room 4 to Room 12.", fix: "Do not worry — the staff know you are coming. Go to main reception and they will take you to Room 12." },
-    weather: { temp: "17°C", description: "Cloudy with rain showers", advice: "Bring an umbrella. Wear a warm layer.", icon: "🌧️" }
+    before: {
+      journeyTip: "Leave home by 9:15am to arrive on time.",
+      documents: ["NHS card", "List of any medicines you take", "A note of any questions you want to ask the doctor"]
+    },
+    arrival: {
+      kiosk: "Use the self check-in screen just inside the main entrance — tap your name and date of birth.",
+      contact: "Ask at the main Reception desk for the Health Check clinic. Tell them your name and appointment time."
+    },
+    after: {
+      actions: ["Book your next appointment at the desk before you leave", "Pick up any prescription from the pharmacy on the ground floor", "Call Dr Williams if you have questions about your results"]
+    }
   },
   {
     id: 2,
@@ -230,9 +346,19 @@ var EVENTS = [
       zoomPassword: "hearts"
     },
     contact: { name: "Priya Sharma", detail: "priya@heartnsooul.org" },
-    notes: "You will talk about plans for the summer workshop. No preparation needed — just join the call and listen. The meeting will be recorded so you can watch it again later.",
+    weather: null,
     alert: null,
-    weather: null
+    before: {
+      journeyTip: "Open Zoom 5 minutes before 2pm so you are ready when the meeting starts.",
+      documents: ["Nothing needed — just your phone or laptop", "A quiet place to sit"]
+    },
+    arrival: {
+      kiosk: "No kiosk needed — just click the Zoom link.",
+      contact: "If you cannot get in, call Priya Sharma on the number below."
+    },
+    after: {
+      actions: ["Check your email for the meeting notes afterwards", "Let Priya know if you missed anything important"]
+    }
   },
   {
     id: 3,
@@ -243,6 +369,7 @@ var EVENTS = [
     duration: "30 minutes",
     typeColor: "#16a085",
     online: false,
+    isPhone: false,
     location: {
       name: "Smile Dental Practice",
       address: "42 High Street, London SE1 1JN",
@@ -258,14 +385,24 @@ var EVENTS = [
         { icon: "🚌", label: "Bus", steps: ["Take bus 21, 35 or 40", "Get off at London Bridge stop", "Walk 2 minutes to High Street"] }
       ],
       privateRoutes: [
-        { icon: "🚗", label: "Drive", steps: ["Head towards London Bridge", "Postcode for sat nav: SE1 1JN", "Street parking available on side roads nearby"] },
+        { icon: "🚗", label: "Drive", steps: ["Head towards London Bridge", "Postcode for sat nav: SE1 1JN", "Street parking available on nearby side roads"] },
         { icon: "🚕", label: "Uber", steps: ["Tap the Uber button below", "It will take you straight to Smile Dental Practice"] }
       ]
     },
     contact: { name: "Smile Dental Reception", detail: "020 7654 3210" },
-    notes: "This is a routine check-up — just a quick look at your teeth. No needles unless the dentist finds something that needs fixing, and they will always ask you first. Please arrive 5 minutes early.",
+    weather: { temp: "20°C", description: "Sunny intervals", advice: "Nice day — no need for a coat.", icon: "🌤️" },
     alert: { title: "Remember to bring ID", message: "The practice needs to see a photo ID for new patients.", fix: "Bring your bus pass, driving licence, or passport. Any one of these is fine." },
-    weather: { temp: "20°C", description: "Sunny intervals", advice: "Nice day — no need for a coat.", icon: "🌤️" }
+    before: {
+      journeyTip: "Leave home by 11:00am to arrive a few minutes early.",
+      documents: ["Photo ID — bus pass, driving licence or passport", "Your NHS number if you have it", "A list of any medicines you take"]
+    },
+    arrival: {
+      kiosk: "There is no kiosk — just walk up to the front desk and give your name.",
+      contact: "Tell the receptionist your name and that you have an 11:30 check-up. They will ask you to take a seat."
+    },
+    after: {
+      actions: ["Book your next check-up before you leave — usually 6 months away", "Ask about any treatment the dentist recommends", "Pick up your appointment card from the front desk"]
+    }
   },
   {
     id: 4,
@@ -276,6 +413,7 @@ var EVENTS = [
     duration: "2.5 hours",
     typeColor: "#e67e22",
     online: false,
+    isPhone: false,
     location: {
       name: "Southwark JobCentre Plus",
       address: "109 Borough High St, London SE1 1NL",
@@ -296,9 +434,19 @@ var EVENTS = [
       ]
     },
     contact: { name: "Marcus Johnson", detail: "020 7407 1234" },
-    notes: "This workshop will help you practise writing a CV and talking about yourself in interviews. You do not need to prepare anything — just come along. Tea, coffee and biscuits will be provided.",
+    weather: { temp: "18°C", description: "Cloudy but dry", advice: "Bring a light jacket just in case.", icon: "🌥️" },
     alert: null,
-    weather: { temp: "18°C", description: "Cloudy but dry", advice: "Bring a light jacket just in case.", icon: "🌥️" }
+    before: {
+      journeyTip: "Leave home by 9:30am — the workshop starts at 10am sharp.",
+      documents: ["Pen and notebook if you have one", "Nothing else needed — just yourself"]
+    },
+    arrival: {
+      kiosk: "No kiosk — go straight to the security desk on the ground floor. Tell them you are here for the Job Skills Workshop with Marcus Johnson.",
+      contact: "The security guard will sign you in and point you to the second floor. Room 2B is on the right."
+    },
+    after: {
+      actions: ["Take home the CV template you made in the workshop", "Call Marcus if you want help finishing your CV", "Sign up for the next workshop if you want more practice"]
+    }
   },
   {
     id: 5,
@@ -317,9 +465,19 @@ var EVENTS = [
       zoomPassword: ""
     },
     contact: { name: "Dr Ahmed — Borough Road Surgery", detail: "020 7123 4567" },
-    notes: "Your GP will call you on your mobile at 9am. Make sure your phone is charged and the sound is turned up the night before. You can be at home — no need to go anywhere.",
-    alert: { title: "Your GP will call you", message: "This is a phone call — your doctor will ring you at 9am.", fix: "Make sure your phone is on, charged, and not on silent the night before." },
-    weather: null
+    weather: null,
+    alert: { title: "Your GP will call you", message: "This is a phone call — your doctor will ring you at 9am on your mobile.", fix: "Make sure your phone is on, charged, and not on silent the night before." },
+    before: {
+      journeyTip: "Stay at home — your doctor will call you at 9am. No need to go anywhere.",
+      documents: ["A list of any questions you want to ask", "A pen and paper to write down what the doctor says", "Your medicines nearby in case the doctor asks about them"]
+    },
+    arrival: {
+      kiosk: "No kiosk needed — just answer your phone when it rings.",
+      contact: "If you miss the call, ring Dr Ahmed back on 020 7123 4567 straight away."
+    },
+    after: {
+      actions: ["Write down what the doctor told you while you remember", "Book any follow-up tests or appointments the doctor mentioned", "Pick up any new prescription from your local pharmacy"]
+    }
   },
   {
     id: 6,
@@ -330,6 +488,7 @@ var EVENTS = [
     duration: "All day",
     typeColor: "#8e44ad",
     online: false,
+    isPhone: false,
     location: {
       name: "ExCeL London",
       address: "Royal Victoria Dock, London E16 1XL",
@@ -350,13 +509,24 @@ var EVENTS = [
       ]
     },
     contact: { name: "Events Team", detail: "events@community.org.uk" },
-    notes: "Lunch is included — no need to bring food. Wear comfortable shoes as the building is large. There will be lots of people there. You can take a break any time in the quiet room on Floor 1.",
+    weather: { temp: "22°C", description: "Sunny with light cloud", advice: "Nice weather! A light jacket is useful in the morning.", icon: "⛅" },
     alert: null,
-    weather: { temp: "22°C", description: "Sunny with light cloud", advice: "Nice weather! A light jacket is useful in the morning.", icon: "⛅" }
+    before: {
+      journeyTip: "Leave home by 8:30am to arrive before the 9:30am start.",
+      documents: ["Your name badge — it will be at the registration desk when you arrive", "Comfortable shoes — the building is very large", "A water bottle"]
+    },
+    arrival: {
+      kiosk: "Go to the Registration Desk just inside the main entrance. Give your name and they will print your badge.",
+      contact: "Look for the helpers in yellow t-shirts — they can point you to Hall N5 and answer any questions."
+    },
+    after: {
+      actions: ["Collect any handouts or leaflets from the tables", "Write down any contacts or ideas you want to remember", "Fill in the feedback form before you leave — your opinion matters"]
+    }
   }
 ];
 
 var currentEvent = null;
+var currentTransport = "pub";
 
 function formatDate(ds) {
   return new Date(ds + "T00:00:00").toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" });
@@ -381,44 +551,39 @@ function speak(text) {
 
 function speakHome() {
   var txt = "Your upcoming appointments. " + EVENTS.map(function(e) {
-    return e.title + ". " + dayLabel(e.date) + ", " + e.time + ". " + (e.online ? "Online." : e.location.name + ".");
-  }).join(" Next: ");
+    return e.title + ". " + dayLabel(e.date) + " at " + e.time + ". " + (e.online ? "Online." : e.location.name + ".");
+  }).join(". Next: ");
   speak(txt);
 }
 
 function speakDetail() {
-  var ev = currentEvent;
-  if (!ev) return;
+  var ev = currentEvent; if (!ev) return;
   var t = ev.title + ". " + formatDate(ev.date) + " at " + ev.time + ". ";
-  if (ev.alert) t += "Important notice: " + ev.alert.message + " " + ev.alert.fix + " ";
-  if (ev.online) {
-    if (ev.isPhone) {
-      t += "This is a phone call. Your doctor will call you at " + ev.time + ". ";
-    } else {
-      t += "This is an online meeting on Zoom. Meeting ID: " + ev.location.zoomId + ". Password: " + ev.location.zoomPassword + ". ";
-    }
+  if (ev.alert) t += "Important notice. " + ev.alert.message + " " + ev.alert.fix + ". ";
+  if (ev.online && ev.isPhone) {
+    t += "This is a phone call. Your doctor will call you. ";
+  } else if (ev.online) {
+    t += "Online Zoom meeting. ID: " + ev.location.zoomId + ". Password: " + ev.location.zoomPassword + ". ";
   } else {
     t += "Location: " + ev.location.name + ". " + ev.location.address + ". ";
   }
-  t += "What to expect: " + ev.notes + ". ";
-  if (ev.weather) t += "Weather: " + ev.weather.temp + ", " + ev.weather.description + ". " + ev.weather.advice;
+  t += "Before you go: " + ev.before.documents.join(". ") + ". ";
+  t += "When you get there: " + ev.arrival.contact + ". ";
+  t += "After the event: " + ev.after.actions.join(". ");
   speak(t);
 }
 
 function renderHome() {
   document.getElementById("today-date").textContent =
     new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
-
   var html = "";
   EVENTS.forEach(function(ev) {
     html += '<div class="event-card" onclick="showDetail(' + ev.id + ')">';
     html += '<div class="event-type-bar" style="background:' + ev.typeColor + '"></div>';
     html += '<div class="event-title">' + ev.title + "</div>";
-    html += '<div class="event-meta">';
-    html += '<div class="event-meta-row">📅 <strong>' + dayLabel(ev.date) + "</strong> — " + formatDate(ev.date) + "</div>";
-    html += '<div class="event-meta-row">🕐 ' + ev.time + " &nbsp;·&nbsp; " + ev.duration + "</div>";
-    html += '<div class="event-meta-row">' + (ev.online ? "💻 Online" : "📍 " + ev.location.name) + "</div>";
-    html += "</div>";
+    html += '<div class="event-date-line">📅 ' + dayLabel(ev.date) + " — " + formatDate(ev.date) + "</div>";
+    html += '<div class="event-time-line">🕐 ' + ev.time + " &nbsp;·&nbsp; " + ev.duration + "</div>";
+    html += '<div class="event-location-line">' + (ev.online ? "💻 Online" : "📍 " + ev.location.name) + "</div>";
     if (ev.alert) html += '<div class="alert-chip">⚠️ Important notice</div>';
     html += '<span class="chevron">›</span>';
     html += "</div>";
@@ -426,8 +591,35 @@ function renderHome() {
   document.getElementById("events-list").innerHTML = html;
 }
 
+function togglePhase(num) {
+  var body = document.getElementById("phase-body-" + num);
+  var chev = document.getElementById("phase-chev-" + num);
+  if (!body) return;
+  var isOpen = body.classList.contains("open");
+  body.classList.toggle("open", !isOpen);
+  if (chev) chev.classList.toggle("open", !isOpen);
+}
+
+function setTransport(type) {
+  currentTransport = type;
+  var pub = document.getElementById("panel-pub");
+  var priv = document.getElementById("panel-priv");
+  var btnPub = document.getElementById("btn-pub");
+  var btnPriv = document.getElementById("btn-priv");
+  if (pub) pub.classList.toggle("active", type === "pub");
+  if (priv) priv.classList.toggle("active", type === "priv");
+  if (btnPub) btnPub.classList.toggle("active", type === "pub");
+  if (btnPriv) btnPriv.classList.toggle("active", type === "priv");
+}
+
+function toggleCheck(el, color) {
+  var isChecked = el.classList.contains("checked");
+  el.classList.toggle("checked", !isChecked);
+  el.textContent = isChecked ? "" : "✓";
+}
+
 function showDetail(id) {
-  currentEvent = null;
+  currentEvent = null; currentTransport = "pub";
   for (var i = 0; i < EVENTS.length; i++) {
     if (EVENTS[i].id === id) { currentEvent = EVENTS[i]; break; }
   }
@@ -435,64 +627,54 @@ function showDetail(id) {
   var ev = currentEvent;
   var html = "";
 
+  // Alert
   if (ev.alert) {
     html += '<div class="alert-banner">';
-    html += '<div class="alert-title">⚠️ ' + ev.alert.title + "</div>";
+    html += '<div class="alert-header"><div class="alert-title">⚠️ ' + ev.alert.title + "</div>";
+    html += '<button class="btn-speak-sm" onclick="speak(\'' + ev.alert.message.replace(/'/g,"") + '. ' + ev.alert.fix.replace(/'/g,"") + '\')">🔊 Read</button></div>';
     html += '<div class="alert-msg">' + ev.alert.message + "</div>";
     html += '<div class="alert-fix">✅ ' + ev.alert.fix + "</div>";
     html += "</div>";
   }
 
+  // Hero
   html += '<div class="detail-hero">';
   html += '<div class="detail-title">' + ev.title + "</div>";
-  html += '<div class="pills">';
-  html += '<span class="pill">📅 ' + formatDate(ev.date) + "</span>";
-  html += '<span class="pill">🕐 ' + ev.time + "</span>";
-  html += '<span class="pill">' + ev.duration + "</span>";
-  html += "</div></div>";
-
-  if (ev.online) {
-    html += '<div class="card-section"><div class="card-head">How to join</div><div class="card-body" style="text-align:center;padding-top:20px;">';
-    if (ev.isPhone) {
-      html += '<div style="font-size:52px;margin-bottom:12px;">📞</div>';
-      html += '<div style="font-size:20px;font-weight:800;margin-bottom:10px;">Your GP will call you</div>';
-      html += '<div style="font-size:17px;margin-bottom:6px;">Phone number</div>';
-      html += '<div class="zoom-id">' + ev.location.zoomId + "</div>";
-      html += '<div style="font-size:16px;color:var(--muted);margin:10px 0 18px;">Make sure your phone is charged and not on silent.</div>';
-      html += '<a href="' + ev.location.zoomLink + '" class="btn-action btn-call">📞 Call them back if needed</a>';
-    } else {
-      html += '<div style="font-size:52px;margin-bottom:12px;">💻</div>';
-      html += '<div style="font-size:20px;font-weight:800;margin-bottom:10px;">' + ev.location.name + "</div>";
-      html += '<div style="font-size:15px;color:var(--muted);margin-bottom:6px;">Meeting ID</div>';
-      html += '<div class="zoom-id">' + ev.location.zoomId + "</div>";
-      html += '<div style="font-size:16px;color:var(--muted);margin:8px 0 18px;">Password: <strong>' + ev.location.zoomPassword + "</strong></div>";
-      html += '<a href="' + ev.location.zoomLink + '" target="_blank" class="btn-action btn-zoom">🎥 Open Zoom now</a>';
-    }
-    html += "</div></div>";
-  } else {
-    html += '<div class="card-section"><div class="card-head">Where to go</div>';
-    html += '<div class="venue-photos">';
-    ev.location.photos.forEach(function(p) {
-      html += '<img class="venue-photo" src="' + p.url + '" alt="' + p.caption + '" loading="lazy">';
-    });
+  html += '<div class="detail-date">📅 ' + dayLabel(ev.date) + " — " + formatDate(ev.date) + "</div>";
+  html += '<div class="detail-time">🕐 ' + ev.time + "&nbsp; · &nbsp;" + ev.duration + "</div>";
+  if (ev.weather) {
+    html += '<div style="margin-top:8px; display:flex; align-items:center; gap:8px; font-size:16px; color:var(--muted); font-weight:600;">';
+    html += ev.weather.icon + " " + ev.weather.temp + " — " + ev.weather.description;
     html += "</div>";
-    html += '<div class="photo-caption">Swipe to see more photos →</div>';
-    html += '<div class="card-body" style="padding-top:10px;">';
-    html += '<div class="loc-name">' + ev.location.name + "</div>";
-    html += '<div class="loc-address">' + ev.location.address + "</div>";
-    html += '<div class="loc-floor">📌 ' + ev.location.floor + "</div>";
-    html += "</div></div>";
+  }
+  html += "</div>";
 
-    html += '<div class="card-section"><div class="card-head">How to get there</div><div class="card-body">';
+  // ─── PHASE 1: BEFORE ───
+  html += '<div class="phase phase-1">';
+  html += '<div class="phase-header" onclick="togglePhase(1)">';
+  html += '<div class="phase-header-left"><div class="phase-icon">📋</div>';
+  html += '<div><div class="phase-title">Before you go</div><div class="phase-subtitle">Documents, journey, weather</div></div></div>';
+  html += '<div class="phase-controls">';
+  html += '<button class="btn-speak-sm" onclick="event.stopPropagation();speakBefore()">🔊 Read</button>';
+  html += '<span class="phase-chevron open" id="phase-chev-1">›</span></div>';
+  html += "</div>";
+  html += '<div class="phase-body open" id="phase-body-1">';
+
+  // Journey tip
+  html += '<div class="subsection">';
+  html += '<div class="subsection-header"><div class="subsection-title">Plan your journey</div>';
+  html += '<button class="btn-speak-sm" onclick="speak(\'' + ev.before.journeyTip.replace(/'/g,"") + '\')">🔊</button></div>';
+  html += '<div class="journey-tip">⏰ ' + ev.before.journeyTip + "</div>";
+
+  if (!ev.online) {
+    // Transport toggle
     html += '<div class="transport-toggle">';
-    html += '<button class="t-btn active" id="btn-pub" onclick="setTransport(\'pub\')"><span class="ti">🚌</span>Public Transport</button>';
-    html += '<button class="t-btn" id="btn-priv" onclick="setTransport(\'priv\')"><span class="ti">🚗</span>Personal / Uber</button>';
+    html += '<button class="t-btn active" id="btn-pub" onclick="setTransport(\'pub\')"><span class="ti">🚌</span>Public</button>';
+    html += '<button class="t-btn" id="btn-priv" onclick="setTransport(\'priv\')"><span class="ti">🚗</span>Personal/Uber</button>';
     html += "</div>";
-
     html += '<div class="t-panel active" id="panel-pub">';
     ev.location.publicRoutes.forEach(function(r, ri) {
-      html += '<div class="route-group">';
-      html += '<div class="route-label">' + r.icon + " " + r.label + "</div>";
+      html += '<div class="route-group"><div class="route-label">' + r.icon + " " + r.label + "</div>";
       r.steps.forEach(function(s, i) {
         html += '<div class="route-step"><div class="step-num">' + (i+1) + '</div><div class="step-text">' + s + "</div></div>";
       });
@@ -500,43 +682,140 @@ function showDetail(id) {
       if (ri < ev.location.publicRoutes.length - 1) html += '<hr class="route-divider">';
     });
     html += "</div>";
-
     html += '<div class="t-panel" id="panel-priv">';
     ev.location.privateRoutes.forEach(function(r, ri) {
-      html += '<div class="route-group">';
-      html += '<div class="route-label">' + r.icon + " " + r.label + "</div>";
+      html += '<div class="route-group"><div class="route-label">' + r.icon + " " + r.label + "</div>";
       r.steps.forEach(function(s, i) {
         html += '<div class="route-step"><div class="step-num">' + (i+1) + '</div><div class="step-text">' + s + "</div></div>";
       });
       html += "</div>";
       if (ri < ev.location.privateRoutes.length - 1) html += '<hr class="route-divider">';
     });
-    html += '<div style="margin-top:18px;">';
+    html += '<div style="margin-top:16px;">';
     html += '<a href="' + ev.location.googleMaps + '" target="_blank" class="btn-action btn-maps">🗺️ Open in Google Maps</a>';
     html += '<a href="' + ev.location.uber + '" target="_blank" class="btn-action btn-uber">🚕 Book an Uber</a>';
     html += "</div></div>";
-    html += "</div></div>";
   }
+  html += "</div>";
 
+  // Documents
+  html += '<div class="subsection">';
+  html += '<div class="subsection-header"><div class="subsection-title">What to bring</div>';
+  html += '<button class="btn-speak-sm" onclick="speak(\'What to bring. ' + ev.before.documents.join(". ").replace(/'/g,"") + '\')">🔊</button></div>';
+  ev.before.documents.forEach(function(doc, i) {
+    html += '<div class="doc-item">';
+    html += '<div class="doc-check" id="doc-' + i + '" onclick="toggleCheck(this)"></div>';
+    html += '<div class="doc-text">' + doc + "</div></div>";
+  });
+  html += "</div>";
+
+  // Weather
   if (ev.weather) {
-    html += '<div class="card-section"><div class="card-head">Weather on the day</div><div class="card-body">';
-    html += '<div class="wx-row"><div class="wx-icon">' + ev.weather.icon + "</div><div>";
+    html += '<div class="subsection">';
+    html += '<div class="subsection-header"><div class="subsection-title">Weather on the day</div>';
+    html += '<button class="btn-speak-sm" onclick="speak(\'' + ev.weather.temp + '. ' + ev.weather.description + '. ' + ev.weather.advice.replace(/'/g,"") + '\')">🔊</button></div>';
+    html += '<div class="wx-row"><div class="wx-icon">' + ev.weather.icon + '</div><div>';
     html += '<div class="wx-temp">' + ev.weather.temp + "</div>";
-    html += '<div class="wx-desc">' + ev.weather.description + "</div>";
-    html += "</div></div>";
+    html += '<div class="wx-desc">' + ev.weather.description + "</div></div></div>";
     html += '<div class="wx-tip">💡 ' + ev.weather.advice + "</div>";
-    html += "</div></div>";
+    html += "</div>";
   }
 
-  html += '<div class="card-section"><div class="card-head">What to expect</div><div class="card-body">';
-  html += '<div class="notes-text">' + ev.notes + "</div>";
+  // Venue photos
+  if (!ev.online && ev.location.photos) {
+    html += '<div class="subsection">';
+    html += '<div class="subsection-header"><div class="subsection-title">What it looks like</div></div>';
+    html += '<div class="venue-photos">';
+    ev.location.photos.forEach(function(p) {
+      html += '<img class="venue-photo" src="' + p.url + '" alt="' + p.caption + '" loading="lazy">';
+    });
+    html += "</div>";
+    html += '<div class="photo-caption">Swipe to see more photos →</div>';
+    html += "</div>";
+  }
+
+  html += "</div></div>"; // close phase-body + phase
+
+  // ─── PHASE 2: ARRIVAL ───
+  html += '<div class="phase phase-2">';
+  html += '<div class="phase-header" onclick="togglePhase(2)">';
+  html += '<div class="phase-header-left"><div class="phase-icon">🏢</div>';
+  html += '<div><div class="phase-title">When you get there</div><div class="phase-subtitle">Check in, who to find</div></div></div>';
+  html += '<div class="phase-controls">';
+  html += '<button class="btn-speak-sm" onclick="event.stopPropagation();speakArrival()">🔊 Read</button>';
+  html += '<span class="phase-chevron" id="phase-chev-2">›</span></div>';
+  html += "</div>";
+  html += '<div class="phase-body" id="phase-body-2">';
+
+  if (!ev.online && ev.location.floor) {
+    html += '<div class="subsection">';
+    html += '<div class="subsection-header"><div class="subsection-title">Where to go</div>';
+    html += '<button class="btn-speak-sm" onclick="speak(\'' + ev.location.floor.replace(/'/g,"") + '\')">🔊</button></div>';
+    html += '<div class="info-item"><div class="info-icon">📍</div>';
+    html += '<div class="info-text"><div class="info-label">' + ev.location.name + "</div>" + ev.location.floor + "</div></div>";
+    html += "</div>";
+  }
+
+  html += '<div class="subsection">';
+  html += '<div class="subsection-header"><div class="subsection-title">Check in</div>';
+  html += '<button class="btn-speak-sm" onclick="speak(\'' + ev.arrival.kiosk.replace(/'/g,"") + '\')">🔊</button></div>';
+  html += '<div class="info-item"><div class="info-icon">🖥️</div>';
+  html += '<div class="info-text">' + ev.arrival.kiosk + "</div></div>";
+  html += "</div>";
+
+  html += '<div class="subsection">';
+  html += '<div class="subsection-header"><div class="subsection-title">Who to speak to</div>';
+  html += '<button class="btn-speak-sm" onclick="speak(\'' + ev.arrival.contact.replace(/'/g,"") + '\')">🔊</button></div>';
+  html += '<div class="info-item"><div class="info-icon">👋</div>';
+  html += '<div class="info-text">' + ev.arrival.contact + "</div></div>";
+  html += '<div class="info-item"><div class="info-icon">👤</div>';
+  html += '<div class="info-text"><div class="info-label">Contact</div>' + ev.contact.name + "<br><span style=\"color:var(--muted);font-size:16px;\">" + ev.contact.detail + "</span></div></div>";
+  html += "</div>";
+
+  if (ev.online) {
+    html += '<div class="subsection">';
+    html += '<div class="subsection-header"><div class="subsection-title">How to join</div></div>';
+    if (ev.isPhone) {
+      html += '<div style="text-align:center;padding:10px 0 4px;">';
+      html += '<div style="font-size:48px;margin-bottom:10px;">📞</div>';
+      html += '<div class="zoom-id">' + ev.location.zoomId + "</div>";
+      html += '<div style="font-size:16px;color:var(--muted);margin:8px 0 16px;">Your doctor will call this number at ' + ev.time + "</div>";
+      html += '<a href="' + ev.location.zoomLink + '" class="btn-action btn-call">📞 Call them back if needed</a>';
+      html += "</div>";
+    } else {
+      html += '<div style="text-align:center;padding:10px 0 4px;">';
+      html += '<div style="font-size:48px;margin-bottom:10px;">💻</div>';
+      html += '<div class="zoom-id">' + ev.location.zoomId + "</div>";
+      html += '<div style="font-size:16px;color:var(--muted);margin:8px 0 16px;">Password: <strong>' + ev.location.zoomPassword + "</strong></div>";
+      html += '<a href="' + ev.location.zoomLink + '" target="_blank" class="btn-action btn-zoom">🎥 Open Zoom now</a>';
+      html += "</div>";
+    }
+    html += "</div>";
+  }
+
+  html += "</div></div>"; // close phase-body + phase
+
+  // ─── PHASE 3: AFTER ───
+  html += '<div class="phase phase-3">';
+  html += '<div class="phase-header" onclick="togglePhase(3)">';
+  html += '<div class="phase-header-left"><div class="phase-icon">✅</div>';
+  html += '<div><div class="phase-title">After the event</div><div class="phase-subtitle">What to do next</div></div></div>';
+  html += '<div class="phase-controls">';
+  html += '<button class="btn-speak-sm" onclick="event.stopPropagation();speakAfter()">🔊 Read</button>';
+  html += '<span class="phase-chevron" id="phase-chev-3">›</span></div>';
+  html += "</div>";
+  html += '<div class="phase-body" id="phase-body-3">';
+  html += '<div class="subsection">';
+  html += '<div class="subsection-header"><div class="subsection-title">Things to do</div>';
+  html += '<button class="btn-speak-sm" onclick="speakAfter()">🔊</button></div>';
+  ev.after.actions.forEach(function(action, i) {
+    html += '<div class="action-item">';
+    html += '<div class="action-check" id="action-' + i + '" onclick="toggleCheck(this)"></div>';
+    html += '<div class="action-text">' + action + "</div></div>";
+  });
+  html += "</div>";
   html += "</div></div>";
 
-  html += '<div class="card-section"><div class="card-head">Contact</div><div class="card-body">';
-  html += '<div class="contact-row"><span style="font-size:28px;">👤</span><div>';
-  html += '<div style="font-weight:800;">' + ev.contact.name + "</div>";
-  html += '<div style="color:var(--muted);font-size:16px;">' + ev.contact.detail + "</div>";
-  html += "</div></div></div></div>";
   html += '<div style="height:20px;"></div>';
 
   document.getElementById("detail-content").innerHTML = html;
@@ -550,42 +829,44 @@ function showDetail(id) {
   window.scrollTo(0, 0);
 }
 
-function setTransport(type) {
-  document.getElementById("btn-pub").classList.toggle("active", type === "pub");
-  document.getElementById("btn-priv").classList.toggle("active", type === "priv");
-  document.getElementById("panel-pub").classList.toggle("active", type === "pub");
-  document.getElementById("panel-priv").classList.toggle("active", type === "priv");
+function speakBefore() {
+  var ev = currentEvent; if (!ev) return;
+  var t = "Before you go. " + ev.before.journeyTip + ". What to bring: " + ev.before.documents.join(". ");
+  if (ev.weather) t += ". Weather: " + ev.weather.temp + ". " + ev.weather.advice;
+  speak(t);
+}
+
+function speakArrival() {
+  var ev = currentEvent; if (!ev) return;
+  var t = "When you get there. " + ev.arrival.kiosk + ". " + ev.arrival.contact;
+  speak(t);
+}
+
+function speakAfter() {
+  var ev = currentEvent; if (!ev) return;
+  speak("After the event. Things to do: " + ev.after.actions.join(". "));
 }
 
 function addGCal() {
   var ev = currentEvent;
-  var ds = ev.date.replace(/-/g, "");
-  var ts = ev.time.replace(":", "") + "00";
-  var te = ev.endTime.replace(":", "") + "00";
+  var ds = ev.date.replace(/-/g,""), ts = ev.time.replace(":","") + "00", te = ev.endTime.replace(":","") + "00";
   var loc = ev.online ? "Online" : ev.location.address;
-  var url = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(ev.title) +
+  window.open("https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(ev.title) +
     "&dates=" + ds + "T" + ts + "/" + ds + "T" + te +
-    "&details=" + encodeURIComponent(ev.notes) +
-    "&location=" + encodeURIComponent(loc);
-  window.open(url, "_blank");
+    "&details=" + encodeURIComponent(ev.before.documents.join(", ")) +
+    "&location=" + encodeURIComponent(loc), "_blank");
 }
 
 function downloadICS() {
   var ev = currentEvent;
-  var ds = ev.date.replace(/-/g, "");
-  var ts = ev.time.replace(":", "") + "00";
-  var te = ev.endTime.replace(":", "") + "00";
+  var ds = ev.date.replace(/-/g,""), ts = ev.time.replace(":","") + "00", te = ev.endTime.replace(":","") + "00";
   var loc = ev.online ? "Online" : ev.location.address;
   var ics = "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Heart n Soul//EN\r\nBEGIN:VEVENT\r\n" +
-    "DTSTART:" + ds + "T" + ts + "\r\n" +
-    "DTEND:" + ds + "T" + te + "\r\n" +
-    "SUMMARY:" + ev.title + "\r\n" +
-    "LOCATION:" + loc + "\r\n" +
-    "DESCRIPTION:" + ev.notes + "\r\n" +
-    "END:VEVENT\r\nEND:VCALENDAR";
+    "DTSTART:" + ds + "T" + ts + "\r\nDTEND:" + ds + "T" + te + "\r\n" +
+    "SUMMARY:" + ev.title + "\r\nLOCATION:" + loc + "\r\nEND:VEVENT\r\nEND:VCALENDAR";
   var a = document.createElement("a");
   a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
-  a.download = ev.title.replace(/\s+/g, "_") + ".ics";
+  a.download = ev.title.replace(/\s+/g,"_") + ".ics";
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
 
@@ -596,8 +877,7 @@ function showScreen(id) {
 
 function showHome() {
   if (window.speechSynthesis) window.speechSynthesis.cancel();
-  showScreen("screen-home");
-  window.scrollTo(0, 0);
+  showScreen("screen-home"); window.scrollTo(0, 0);
 }
 
 renderHome();
