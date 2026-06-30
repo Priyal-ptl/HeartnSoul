@@ -6,292 +6,128 @@
   <title>My Appointments — Heart n Soul</title>
   <style>
     :root {
-      --red: #c0392b;
-      --red-light: #fde0d8;
-      --red-pale: #fff8f4;
-      --white: #ffffff;
-      --text: #1a1a1a;
-      --muted: #666666;
-      --border: #e8e0dc;
-      --green: #1e8449;
-      --green-bg: #eafaf1;
-      --amber: #b7770d;
-      --amber-bg: #fef9e7;
-      --blue: #1a5276;
-      --blue-bg: #eaf4fb;
-      --alert-bg: #fdedec;
-      --radius: 16px;
-      --radius-sm: 10px;
+      --red: #c0392b; --red-light: #fde0d8; --red-pale: #fff8f4;
+      --white: #fff; --text: #1a1a1a; --muted: #666; --border: #e8e0dc;
+      --green: #1e8449; --green-bg: #eafaf1;
+      --amber: #b7770d; --amber-bg: #fef9e7;
+      --blue: #1a5276; --blue-bg: #eaf4fb;
+      --alert-bg: #fdedec; --radius: 16px; --radius-sm: 10px;
       --shadow: 0 2px 16px rgba(0,0,0,0.08);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
       font-family: -apple-system, 'Segoe UI', Arial, sans-serif;
-      background: var(--red-pale);
-      color: var(--text);
-      font-size: 18px;
-      line-height: 1.5;
-      max-width: 480px;
-      margin: 0 auto;
-      min-height: 100vh;
-      padding-bottom: 90px;
+      background: var(--red-pale); color: var(--text);
+      font-size: 18px; line-height: 1.5;
+      max-width: 480px; margin: 0 auto; min-height: 100vh; padding-bottom: 100px;
     }
     .screen { display: none; }
     .screen.active { display: block; }
-
-    /* HEADER */
     .header {
-      background: var(--red);
-      color: white;
-      padding: 18px 20px 14px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      background: var(--red); color: white;
+      padding: 18px 20px 14px; position: sticky; top: 0; z-index: 100;
     }
     .header-top { display: flex; align-items: center; justify-content: space-between; }
     .header-title { font-size: 22px; font-weight: 800; }
     .header-date { font-size: 14px; opacity: 0.85; margin-top: 2px; }
     .btn-speak {
-      background: rgba(255,255,255,0.22);
-      border: none;
-      color: white;
-      border-radius: 30px;
-      padding: 9px 16px;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: inherit;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-shrink: 0;
+      background: rgba(255,255,255,0.22); border: none; color: white;
+      border-radius: 30px; padding: 9px 16px; font-size: 15px; font-weight: 700;
+      cursor: pointer; font-family: inherit; flex-shrink: 0;
     }
-    .btn-speak:active { background: rgba(255,255,255,0.38); }
     .btn-back {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 18px;
-      font-weight: 700;
-      cursor: pointer;
-      padding: 4px 12px 4px 0;
-      font-family: inherit;
+      background: none; border: none; color: white;
+      font-size: 18px; font-weight: 700; cursor: pointer; font-family: inherit; padding: 4px 12px 4px 0;
     }
-
-    /* WEATHER BAR */
     .weather-bar {
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 16px;
-      color: var(--muted);
+      background: var(--white); border-bottom: 1px solid var(--border);
+      padding: 12px 20px; display: flex; align-items: center; gap: 10px;
+      font-size: 16px; color: var(--muted);
     }
-
-    /* EVENT CARDS */
     .section-label {
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-      padding: 18px 20px 8px;
+      font-size: 13px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--muted); padding: 18px 20px 8px;
     }
     .event-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      margin: 0 16px 12px;
-      padding: 18px 48px 18px 18px;
-      box-shadow: var(--shadow);
-      cursor: pointer;
-      border: 2.5px solid transparent;
-      position: relative;
-      transition: border-color 0.12s;
+      background: var(--white); border-radius: var(--radius);
+      margin: 0 16px 12px; padding: 18px 48px 18px 22px;
+      box-shadow: var(--shadow); cursor: pointer;
+      border: 2.5px solid transparent; position: relative;
     }
     .event-card:active { border-color: var(--red); }
     .event-type-bar {
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 6px;
-      border-radius: 14px 0 0 14px;
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 6px; border-radius: 14px 0 0 14px;
     }
     .event-title { font-size: 20px; font-weight: 800; line-height: 1.25; margin-bottom: 8px; }
     .event-meta { color: var(--muted); font-size: 16px; }
     .event-meta-row { display: flex; align-items: center; gap: 7px; margin-bottom: 4px; }
     .alert-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: var(--alert-bg);
-      color: var(--red);
-      border-radius: 20px;
-      padding: 5px 12px;
-      font-size: 14px;
-      font-weight: 700;
-      margin-top: 10px;
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--alert-bg); color: var(--red);
+      border-radius: 20px; padding: 5px 12px; font-size: 14px; font-weight: 700; margin-top: 10px;
     }
     .chevron { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: #ccc; font-size: 22px; }
-
-    /* DETAIL */
-    .detail-content { padding-bottom: 110px; }
-
-    /* ALERT BANNER */
-    .alert-banner {
-      background: var(--alert-bg);
-      border-left: 5px solid var(--red);
-      padding: 18px 20px;
-    }
+    .detail-content { padding-bottom: 120px; }
+    .alert-banner { background: var(--alert-bg); border-left: 5px solid var(--red); padding: 18px 20px; }
     .alert-title { font-size: 18px; font-weight: 800; color: var(--red); margin-bottom: 6px; }
     .alert-msg { font-size: 17px; margin-bottom: 10px; }
     .alert-fix { font-size: 16px; color: var(--green); font-weight: 700; }
-
-    /* HERO */
     .detail-hero { padding: 20px 20px 0; }
     .detail-title { font-size: 28px; font-weight: 800; line-height: 1.2; margin-bottom: 14px; }
     .pills { display: flex; flex-wrap: wrap; gap: 8px; }
-    .pill {
-      background: var(--red-light);
-      color: var(--red);
-      border-radius: 20px;
-      padding: 6px 14px;
-      font-size: 15px;
-      font-weight: 700;
-    }
-
-    /* CARD SECTIONS */
-    .card-section {
-      background: var(--white);
-      border-radius: var(--radius);
-      margin: 14px 16px 0;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
+    .pill { background: var(--red-light); color: var(--red); border-radius: 20px; padding: 6px 14px; font-size: 15px; font-weight: 700; }
+    .card-section { background: var(--white); border-radius: var(--radius); margin: 14px 16px 0; overflow: hidden; box-shadow: var(--shadow); }
     .card-head {
-      padding: 14px 18px;
-      font-size: 13px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--muted);
+      padding: 14px 18px; font-size: 13px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted);
       border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
     }
     .card-body { padding: 16px 18px; }
-
-    /* PHOTOS */
     .venue-photos {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding: 16px 18px 10px;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
+      display: flex; gap: 10px; overflow-x: auto;
+      padding: 16px 18px 10px; -webkit-overflow-scrolling: touch;
     }
     .venue-photos::-webkit-scrollbar { display: none; }
-    .venue-photo {
-      width: 230px;
-      height: 148px;
-      object-fit: cover;
-      border-radius: 12px;
-      flex-shrink: 0;
-      scroll-snap-align: start;
-      background: var(--border);
-    }
+    .venue-photo { width: 230px; height: 148px; object-fit: cover; border-radius: 12px; flex-shrink: 0; background: var(--border); }
     .photo-caption { font-size: 13px; color: var(--muted); padding: 0 18px 6px; font-style: italic; }
-
     .loc-name { font-size: 19px; font-weight: 800; margin-bottom: 4px; }
     .loc-address { font-size: 16px; color: var(--muted); margin-bottom: 10px; }
-    .loc-floor {
-      font-size: 16px;
-      background: var(--amber-bg);
-      color: var(--amber);
-      border-radius: var(--radius-sm);
-      padding: 10px 14px;
-      font-weight: 600;
-    }
-
-    /* TRANSPORT TOGGLE */
+    .loc-floor { font-size: 16px; background: var(--amber-bg); color: var(--amber); border-radius: var(--radius-sm); padding: 10px 14px; font-weight: 600; }
     .transport-toggle { display: flex; gap: 10px; margin-bottom: 16px; }
     .t-btn {
-      flex: 1;
-      padding: 14px 8px;
-      border-radius: var(--radius-sm);
-      border: 2.5px solid var(--border);
-      background: var(--white);
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: inherit;
-      color: var(--muted);
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 5px;
-      transition: all 0.12s;
+      flex: 1; padding: 14px 8px; border-radius: var(--radius-sm);
+      border: 2.5px solid var(--border); background: var(--white);
+      font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit;
+      color: var(--muted); text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
     }
     .t-btn .ti { font-size: 28px; }
     .t-btn.active { border-color: var(--red); background: var(--red-light); color: var(--red); }
-
     .t-panel { display: none; }
     .t-panel.active { display: block; }
-
     .route-group { margin-bottom: 18px; }
     .route-group:last-child { margin-bottom: 0; }
     .route-label { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 10px; }
     .route-step { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border); }
     .route-step:last-child { border-bottom: none; }
     .step-num {
-      background: var(--red);
-      color: white;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 800;
-      flex-shrink: 0;
-      margin-top: 2px;
+      background: var(--red); color: white; width: 28px; height: 28px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 800; flex-shrink: 0; margin-top: 2px;
     }
     .step-text { font-size: 16px; line-height: 1.5; }
-
-    /* WEATHER */
+    .route-divider { border: none; border-top: 2px dashed #e8e0dc; margin: 16px 0; }
     .wx-row { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
     .wx-icon { font-size: 52px; }
     .wx-temp { font-size: 34px; font-weight: 800; line-height: 1; }
     .wx-desc { font-size: 16px; color: var(--muted); margin-top: 3px; }
-    .wx-tip {
-      background: var(--amber-bg);
-      color: var(--amber);
-      border-radius: var(--radius-sm);
-      padding: 12px 14px;
-      font-size: 16px;
-      font-weight: 700;
-    }
-
-    /* BIG ACTION BUTTONS */
+    .wx-tip { background: var(--amber-bg); color: var(--amber); border-radius: var(--radius-sm); padding: 12px 14px; font-size: 16px; font-weight: 700; }
     .btn-action {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      padding: 16px;
-      border-radius: var(--radius-sm);
-      border: none;
-      font-size: 17px;
-      font-weight: 800;
-      cursor: pointer;
-      font-family: inherit;
-      margin-bottom: 10px;
-      text-decoration: none;
-      color: white;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; padding: 16px; border-radius: var(--radius-sm); border: none;
+      font-size: 17px; font-weight: 800; cursor: pointer; font-family: inherit;
+      margin-bottom: 10px; text-decoration: none; color: white;
     }
     .btn-action:last-child { margin-bottom: 0; }
     .btn-maps { background: #4285f4; }
@@ -299,64 +135,20 @@
     .btn-zoom { background: #2d8cff; }
     .btn-gcal { background: var(--green); }
     .btn-ics { background: var(--blue); }
-
-    /* NOTES */
+    .btn-call { background: #27ae60; }
     .notes-text { font-size: 17px; line-height: 1.65; }
-
-    /* ONLINE */
-    .online-block { text-align: center; padding: 10px 0 4px; }
-    .zoom-id {
-      font-family: monospace;
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: 3px;
-      background: var(--blue-bg);
-      color: var(--blue);
-      padding: 12px 20px;
-      border-radius: var(--radius-sm);
-      margin: 8px 0;
-      display: inline-block;
-    }
-
-    /* CONTACT */
+    .zoom-id { font-family: monospace; font-size: 26px; font-weight: 800; letter-spacing: 3px; background: var(--blue-bg); color: var(--blue); padding: 12px 20px; border-radius: var(--radius-sm); margin: 8px 0; display: inline-block; }
     .contact-row { display: flex; align-items: center; gap: 12px; font-size: 17px; }
-    .contact-info .name { font-weight: 800; }
-    .contact-info .detail { color: var(--muted); font-size: 16px; }
-
-    /* STICKY BOTTOM */
     .sticky-bottom {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      max-width: 480px;
-      margin: 0 auto;
-      background: var(--white);
-      border-top: 1px solid var(--border);
-      padding: 12px 16px;
-      z-index: 200;
-    }
-
-    /* DIVIDER */
-    .route-divider { border: none; border-top: 2px dashed #e8e0dc; margin: 16px 0; }
-
-    /* SPEAK SECTION BTN */
-    .speak-btn-inline {
-      background: none;
-      border: 1.5px solid var(--border);
-      color: var(--muted);
-      border-radius: 20px;
-      padding: 4px 12px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: inherit;
+      position: fixed; bottom: 0; left: 0; right: 0;
+      max-width: 480px; margin: 0 auto;
+      background: var(--white); border-top: 1px solid var(--border);
+      padding: 12px 16px; z-index: 200;
     }
   </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════
-     HOME SCREEN
-══════════════════════════════ -->
 <div class="screen active" id="screen-home">
   <div class="header">
     <div class="header-top">
@@ -375,9 +167,6 @@
   <div id="events-list"></div>
 </div>
 
-<!-- ══════════════════════════════
-     DETAIL SCREEN
-══════════════════════════════ -->
 <div class="screen" id="screen-detail">
   <div class="header">
     <div class="header-top">
@@ -390,10 +179,7 @@
 </div>
 
 <script>
-// ═══════════════════════════════════════════
-// DATA
-// ═══════════════════════════════════════════
-const EVENTS = [
+var EVENTS = [
   {
     id: 1,
     title: "NHS Health Check",
@@ -401,72 +187,31 @@ const EVENTS = [
     time: "10:00",
     endTime: "10:45",
     duration: "45 minutes",
-    type: "medical",
     typeColor: "#e74c3c",
     online: false,
     location: {
-      name: "St Thomas' Hospital",
+      name: "St Thomas Hospital",
       address: "Westminster Bridge Rd, London SE1 7EH",
-      floor: "📌 Go to the Main Entrance. Ask at the Reception desk for the Health Check clinic. They will take you there.",
+      floor: "Go to the Main Entrance. Ask at Reception for the Health Check clinic.",
       photos: [
-        { url: "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=600&q=80", caption: "Main entrance — St Thomas' Hospital" },
-        { url: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80", caption: "What the building looks like from outside" }
+        { url: "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=600&q=80", caption: "Main entrance" },
+        { url: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80", caption: "Outside the building" }
       ],
-      googleMaps: "https://maps.google.com/?q=St+Thomas+Hospital+Westminster+Bridge+Road+London+SE1+7EH",
-      uber: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=Westminster%20Bridge%20Rd%2C%20London%20SE1%207EH&dropoff[nickname]=St%20Thomas%20Hospital",
+      googleMaps: "https://maps.google.com/?q=St+Thomas+Hospital+London+SE1+7EH",
+      uber: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=Westminster%20Bridge%20Rd%20London%20SE1%207EH&dropoff[nickname]=St%20Thomas%20Hospital",
       publicRoutes: [
-        {
-          icon: "🚇",
-          label: "Tube — Waterloo Station",
-          steps: [
-            "Take the Jubilee, Bakerloo or Northern line",
-            "Get off at Waterloo station",
-            "Walk across Westminster Bridge — about 5 minutes"
-          ]
-        },
-        {
-          icon: "🚌",
-          label: "Bus",
-          steps: [
-            "Take bus 12, 53 or 148",
-            "Get off at Westminster Bridge Road stop",
-            "The hospital entrance is right there"
-          ]
-        }
+        { icon: "🚇", label: "Tube — Waterloo", steps: ["Take the Jubilee, Bakerloo or Northern line", "Get off at Waterloo station", "Walk 5 minutes across Westminster Bridge"] },
+        { icon: "🚌", label: "Bus", steps: ["Take bus 12, 53 or 148", "Get off at Westminster Bridge Road stop", "The hospital entrance is right there"] }
       ],
       privateRoutes: [
-        {
-          icon: "🚗",
-          label: "Drive",
-          steps: [
-            "Head towards Westminster Bridge",
-            "Postcode for sat nav: SE1 7EH",
-            "Paid parking is available at St Thomas' car park"
-          ]
-        },
-        {
-          icon: "🚕",
-          label: "Uber",
-          steps: [
-            "Tap the Uber button below",
-            "The app will take you straight to St Thomas' Hospital"
-          ]
-        }
+        { icon: "🚗", label: "Drive", steps: ["Head towards Westminster Bridge", "Postcode for sat nav: SE1 7EH", "Parking at St Thomas car park"] },
+        { icon: "🚕", label: "Uber", steps: ["Tap the Uber button below", "It will take you straight to St Thomas Hospital"] }
       ]
     },
     contact: { name: "Dr Sarah Williams", detail: "020 7188 7188" },
-    notes: "Please bring your NHS card and a list of any medicines you take.\n\nYou will have a blood pressure check and a short chat with the doctor. It is friendly and relaxed — nothing to worry about. The whole appointment takes about 45 minutes.",
-    alert: {
-      title: "⚠️ Important — Room has changed",
-      message: "Your appointment has moved from Room 4 to Room 12.",
-      fix: "✅ Don't worry — the staff know you are coming. Go to the main reception and they will take you straight to Room 12."
-    },
-    weather: {
-      temp: "17°C",
-      description: "Cloudy with rain showers",
-      advice: "🌂 Bring an umbrella. Wear a warm layer.",
-      icon: "🌧️"
-    }
+    notes: "Please bring your NHS card and a list of any medicines you take. You will have a blood pressure check and a short chat with the doctor. It is friendly and relaxed.",
+    alert: { title: "Room has changed", message: "Your appointment has moved from Room 4 to Room 12.", fix: "Do not worry — the staff know you are coming. Go to main reception and they will take you to Room 12." },
+    weather: { temp: "17°C", description: "Cloudy with rain showers", advice: "Bring an umbrella. Wear a warm layer.", icon: "🌧️" }
   },
   {
     id: 2,
@@ -475,9 +220,9 @@ const EVENTS = [
     time: "14:00",
     endTime: "15:00",
     duration: "1 hour",
-    type: "meeting",
     typeColor: "#3498db",
     online: true,
+    isPhone: false,
     location: {
       name: "Online — Zoom call",
       zoomLink: "https://zoom.us/j/123456789",
@@ -485,7 +230,7 @@ const EVENTS = [
       zoomPassword: "hearts"
     },
     contact: { name: "Priya Sharma", detail: "priya@heartnsooul.org" },
-    notes: "You will talk about plans for the summer workshop.\n\nNo preparation needed — just join the call and listen. The meeting will be recorded so you can watch it again later if you need to.",
+    notes: "You will talk about plans for the summer workshop. No preparation needed — just join the call and listen. The meeting will be recorded so you can watch it again later.",
     alert: null,
     weather: null
   },
@@ -496,72 +241,31 @@ const EVENTS = [
     time: "11:30",
     endTime: "12:00",
     duration: "30 minutes",
-    type: "medical",
     typeColor: "#16a085",
     online: false,
     location: {
       name: "Smile Dental Practice",
       address: "42 High Street, London SE1 1JN",
-      floor: "📌 Go through the main door and sign in at the front desk. Tell them your name and they will call you when the dentist is ready.",
+      floor: "Go through the main door and sign in at the front desk.",
       photos: [
-        { url: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=600&q=80", caption: "Smile Dental Practice — front entrance" },
+        { url: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=600&q=80", caption: "Smile Dental Practice front entrance" },
         { url: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=80", caption: "Inside the waiting room" }
       ],
       googleMaps: "https://maps.google.com/?q=42+High+Street+London+SE1+1JN",
-      uber: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=42%20High%20Street%2C%20London%20SE1%201JN&dropoff[nickname]=Smile%20Dental%20Practice",
+      uber: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=42%20High%20Street%20London%20SE1%201JN&dropoff[nickname]=Smile%20Dental%20Practice",
       publicRoutes: [
-        {
-          icon: "🚇",
-          label: "Tube — London Bridge",
-          steps: [
-            "Take the Jubilee or Northern line",
-            "Get off at London Bridge station",
-            "Walk 4 minutes down Borough High Street"
-          ]
-        },
-        {
-          icon: "🚌",
-          label: "Bus",
-          steps: [
-            "Take bus 21, 35 or 40",
-            "Get off at London Bridge stop",
-            "Walk 2 minutes to High Street"
-          ]
-        }
+        { icon: "🚇", label: "Tube — London Bridge", steps: ["Take the Jubilee or Northern line", "Get off at London Bridge station", "Walk 4 minutes down Borough High Street"] },
+        { icon: "🚌", label: "Bus", steps: ["Take bus 21, 35 or 40", "Get off at London Bridge stop", "Walk 2 minutes to High Street"] }
       ],
       privateRoutes: [
-        {
-          icon: "🚗",
-          label: "Drive",
-          steps: [
-            "Head towards London Bridge",
-            "Postcode for sat nav: SE1 1JN",
-            "Street parking available on side roads nearby"
-          ]
-        },
-        {
-          icon: "🚕",
-          label: "Uber",
-          steps: [
-            "Tap the Uber button below",
-            "The app will take you straight to Smile Dental Practice"
-          ]
-        }
+        { icon: "🚗", label: "Drive", steps: ["Head towards London Bridge", "Postcode for sat nav: SE1 1JN", "Street parking available on side roads nearby"] },
+        { icon: "🚕", label: "Uber", steps: ["Tap the Uber button below", "It will take you straight to Smile Dental Practice"] }
       ]
     },
     contact: { name: "Smile Dental Reception", detail: "020 7654 3210" },
-    notes: "This is a routine check-up — just a quick look at your teeth. No needles unless the dentist finds something that needs fixing, and they will always ask you first.\n\nPlease arrive 5 minutes early to fill in a short form at the front desk.",
-    alert: {
-      title: "⚠️ Remember to bring ID",
-      message: "The practice needs to see a photo ID for new patients.",
-      fix: "✅ Bring your bus pass, driving licence, or passport. Any one of these is fine."
-    },
-    weather: {
-      temp: "20°C",
-      description: "Sunny intervals",
-      advice: "☀️ Nice day — no need for a coat.",
-      icon: "🌤️"
-    }
+    notes: "This is a routine check-up — just a quick look at your teeth. No needles unless the dentist finds something that needs fixing, and they will always ask you first. Please arrive 5 minutes early.",
+    alert: { title: "Remember to bring ID", message: "The practice needs to see a photo ID for new patients.", fix: "Bring your bus pass, driving licence, or passport. Any one of these is fine." },
+    weather: { temp: "20°C", description: "Sunny intervals", advice: "Nice day — no need for a coat.", icon: "🌤️" }
   },
   {
     id: 4,
@@ -570,478 +274,330 @@ const EVENTS = [
     time: "10:00",
     endTime: "12:30",
     duration: "2.5 hours",
-    type: "conference",
     typeColor: "#e67e22",
     online: false,
     location: {
       name: "Southwark JobCentre Plus",
-      address: "Lee House, 109 Borough High St, London SE1 1NL",
-      floor: "📌 Go to the second floor. Ask the security guard at the front desk — they will point you to Room 2B.",
+      address: "109 Borough High St, London SE1 1NL",
+      floor: "Go to the second floor. Ask the security guard — they will point you to Room 2B.",
       photos: [
-        { url: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80", caption: "Southwark JobCentre Plus — front of the building" },
-        { url: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80", caption: "The training room inside" }
+        { url: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80", caption: "Front of the building" },
+        { url: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80", caption: "Training room inside" }
       ],
       googleMaps: "https://maps.google.com/?q=109+Borough+High+Street+London+SE1+1NL",
-      uber: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=109%20Borough%20High%20St%2C%20London%20SE1%201NL&dropoff[nickname]=Southwark%20JobCentre",
+      uber: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=109%20Borough%20High%20St%20London%20SE1%201NL&dropoff[nickname]=Southwark%20JobCentre",
       publicRoutes: [
-        {
-          icon: "🚇",
-          label: "Tube — Borough Station",
-          steps: [
-            "Take the Northern line",
-            "Get off at Borough station",
-            "Walk 3 minutes up Borough High Street"
-          ]
-        },
-        {
-          icon: "🚌",
-          label: "Bus",
-          steps: [
-            "Take bus 21, 35 or 133",
-            "Get off at Borough High Street stop",
-            "The building is right there"
-          ]
-        }
+        { icon: "🚇", label: "Tube — Borough", steps: ["Take the Northern line", "Get off at Borough station", "Walk 3 minutes up Borough High Street"] },
+        { icon: "🚌", label: "Bus", steps: ["Take bus 21, 35 or 133", "Get off at Borough High Street stop", "The building is right there"] }
       ],
       privateRoutes: [
-        {
-          icon: "🚗",
-          label: "Drive",
-          steps: [
-            "Head towards Borough High Street",
-            "Postcode for sat nav: SE1 1NL",
-            "Parking is available at Snowfields car park, 5 minutes walk"
-          ]
-        },
-        {
-          icon: "🚕",
-          label: "Uber",
-          steps: [
-            "Tap the Uber button below",
-            "Drop-off is right outside the building"
-          ]
-        }
+        { icon: "🚗", label: "Drive", steps: ["Head towards Borough High Street", "Postcode for sat nav: SE1 1NL", "Parking at Snowfields car park, 5 minutes walk"] },
+        { icon: "🚕", label: "Uber", steps: ["Tap the Uber button below", "Drop-off is right outside the building"] }
       ]
     },
-    contact: { name: "Marcus Johnson — Workshop Lead", detail: "020 7407 1234" },
-    notes: "This workshop will help you practise writing a CV and talking about yourself in interviews. You do not need to prepare anything — just come along.\n\nTea, coffee and biscuits will be provided. The session is relaxed and friendly.",
+    contact: { name: "Marcus Johnson", detail: "020 7407 1234" },
+    notes: "This workshop will help you practise writing a CV and talking about yourself in interviews. You do not need to prepare anything — just come along. Tea, coffee and biscuits will be provided.",
     alert: null,
-    weather: {
-      temp: "18°C",
-      description: "Cloudy but dry",
-      advice: "🧥 Bring a light jacket just in case.",
-      icon: "🌥️"
-    }
+    weather: { temp: "18°C", description: "Cloudy but dry", advice: "Bring a light jacket just in case.", icon: "🌥️" }
   },
   {
     id: 5,
-    title: "GP Follow-up",
+    title: "GP Follow-up Call",
     date: "2026-07-10",
     time: "09:00",
     endTime: "09:20",
     duration: "20 minutes",
-    type: "medical",
     typeColor: "#e74c3c",
     online: true,
+    isPhone: true,
     location: {
-      name: "Online — Phone call with your GP",
+      name: "Phone call from your GP",
       zoomLink: "tel:02071234567",
       zoomId: "020 7123 4567",
-      zoomPassword: "n/a"
+      zoomPassword: ""
     },
     contact: { name: "Dr Ahmed — Borough Road Surgery", detail: "020 7123 4567" },
-    notes: "Your GP will call you on your mobile at 9am. Make sure your phone is charged and the sound is turned up the night before.\n\nThe call will take about 20 minutes. You can be at home — no need to go anywhere.",
-    alert: {
-      title: "⚠️ Your GP will call you",
-      message: "This appointment is a phone call — your doctor will ring you at 9am.",
-      fix: "✅ Make sure your phone is on, charged, and not on silent the night before."
-    },
+    notes: "Your GP will call you on your mobile at 9am. Make sure your phone is charged and the sound is turned up the night before. You can be at home — no need to go anywhere.",
+    alert: { title: "Your GP will call you", message: "This is a phone call — your doctor will ring you at 9am.", fix: "Make sure your phone is on, charged, and not on silent the night before." },
     weather: null
   },
   {
-    id: 7,
+    id: 6,
     title: "Community Conference",
-    date: "2026-07-03",
+    date: "2026-07-11",
     time: "09:30",
     endTime: "17:00",
     duration: "All day",
-    type: "conference",
     typeColor: "#8e44ad",
     online: false,
     location: {
       name: "ExCeL London",
       address: "Royal Victoria Dock, London E16 1XL",
-      floor: "📌 Go to Hall N5. Follow the big signs from the main entrance. Helpers will be at the door to welcome you.",
+      floor: "Go to Hall N5. Follow the big signs from the main entrance. Helpers will be at the door to welcome you.",
       photos: [
         { url: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80", caption: "ExCeL London from outside" },
         { url: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=600&q=80", caption: "Inside the conference hall" }
       ],
       googleMaps: "https://maps.google.com/?q=ExCeL+London+Royal+Victoria+Dock+E16+1XL",
-      uber: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=Royal%20Victoria%20Dock%2C%20London%20E16%201XL&dropoff[nickname]=ExCeL%20London",
+      uber: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=Royal%20Victoria%20Dock%20London%20E16%201XL&dropoff[nickname]=ExCeL%20London",
       publicRoutes: [
-        {
-          icon: "🚊",
-          label: "DLR — easiest route",
-          steps: [
-            "Take the DLR towards Beckton or Woolwich Arsenal",
-            "Get off at Custom House station",
-            "ExCeL is right next to the station — 2 minute walk"
-          ]
-        },
-        {
-          icon: "🚂",
-          label: "Elizabeth line (purple line)",
-          steps: [
-            "Take the Elizabeth line",
-            "Get off at Custom House station",
-            "Walk 2 minutes to the ExCeL entrance"
-          ]
-        },
-        {
-          icon: "🚌",
-          label: "Bus",
-          steps: [
-            "Take bus 473 or 262",
-            "Get off at the ExCeL stop"
-          ]
-        }
+        { icon: "🚊", label: "DLR — easiest route", steps: ["Take the DLR towards Beckton or Woolwich Arsenal", "Get off at Custom House station", "ExCeL is right next to the station — 2 minute walk"] },
+        { icon: "🚂", label: "Elizabeth line", steps: ["Take the Elizabeth line (purple line)", "Get off at Custom House station", "Walk 2 minutes to the ExCeL entrance"] }
       ],
       privateRoutes: [
-        {
-          icon: "🚗",
-          label: "Drive",
-          steps: [
-            "Head towards Royal Victoria Dock",
-            "Postcode for sat nav: E16 1XL",
-            "On-site paid parking is available"
-          ]
-        },
-        {
-          icon: "🚕",
-          label: "Uber",
-          steps: [
-            "Tap the Uber button below",
-            "The app will take you straight to ExCeL London"
-          ]
-        }
+        { icon: "🚗", label: "Drive", steps: ["Head towards Royal Victoria Dock", "Postcode for sat nav: E16 1XL", "On-site paid parking is available"] },
+        { icon: "🚕", label: "Uber", steps: ["Tap the Uber button below", "It will take you straight to ExCeL London"] }
       ]
     },
     contact: { name: "Events Team", detail: "events@community.org.uk" },
-    notes: "Lunch is included — no need to bring food.\n\nWear comfortable shoes as the building is large. There will be lots of people there. You can take a break any time in the quiet room on Floor 1.",
+    notes: "Lunch is included — no need to bring food. Wear comfortable shoes as the building is large. There will be lots of people there. You can take a break any time in the quiet room on Floor 1.",
     alert: null,
-    weather: {
-      temp: "22°C",
-      description: "Sunny with light cloud",
-      advice: "☀️ Nice weather! A light jacket is useful in the morning.",
-      icon: "⛅"
-    }
+    weather: { temp: "22°C", description: "Sunny with light cloud", advice: "Nice weather! A light jacket is useful in the morning.", icon: "⛅" }
   }
 ];
 
-// ═══════════════════════════════════════════
-// UTILS
-// ═══════════════════════════════════════════
-let currentEvent = null;
+var currentEvent = null;
 
 function formatDate(ds) {
-  return new Date(ds + 'T00:00:00').toLocaleDateString('en-GB', {
-    weekday: 'long', day: 'numeric', month: 'long'
-  });
+  return new Date(ds + "T00:00:00").toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" });
 }
 
 function dayLabel(ds) {
-  const d = new Date(ds + 'T00:00:00');
-  const today = new Date(); today.setHours(0,0,0,0);
-  const diff = Math.round((d - today) / 86400000);
-  if (diff === 0) return 'Today';
-  if (diff === 1) return 'Tomorrow';
-  return d.toLocaleDateString('en-GB', { weekday: 'long' });
+  var d = new Date(ds + "T00:00:00");
+  var today = new Date(); today.setHours(0,0,0,0);
+  var diff = Math.round((d - today) / 86400000);
+  if (diff === 0) return "Today";
+  if (diff === 1) return "Tomorrow";
+  return d.toLocaleDateString("en-GB", { weekday: "long" });
 }
 
 function speak(text) {
-  if (!('speechSynthesis' in window)) return;
+  if (!("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
+  var u = new SpeechSynthesisUtterance(text);
   u.rate = 0.88; u.pitch = 1;
   window.speechSynthesis.speak(u);
 }
 
 function speakHome() {
-  const txt = 'Your upcoming appointments. ' + EVENTS.map(e =>
-    `${e.title}. ${dayLabel(e.date)}, ${e.time}. ${e.online ? 'Online.' : e.location.name + '.'}`
-  ).join(' Next: ');
+  var txt = "Your upcoming appointments. " + EVENTS.map(function(e) {
+    return e.title + ". " + dayLabel(e.date) + ", " + e.time + ". " + (e.online ? "Online." : e.location.name + ".");
+  }).join(" Next: ");
   speak(txt);
 }
 
-function speakDetail(ev) {
-  let t = `${ev.title}. ${formatDate(ev.date)} at ${ev.time}. `;
-  if (ev.alert) t += `Important notice: ${ev.alert.message} ${ev.alert.fix} `;
+function speakDetail() {
+  var ev = currentEvent;
+  if (!ev) return;
+  var t = ev.title + ". " + formatDate(ev.date) + " at " + ev.time + ". ";
+  if (ev.alert) t += "Important notice: " + ev.alert.message + " " + ev.alert.fix + " ";
   if (ev.online) {
-    t += `This is an online meeting on Zoom. Meeting ID: ${ev.location.zoomId}. Password: ${ev.location.zoomPassword}. `;
+    if (ev.isPhone) {
+      t += "This is a phone call. Your doctor will call you at " + ev.time + ". ";
+    } else {
+      t += "This is an online meeting on Zoom. Meeting ID: " + ev.location.zoomId + ". Password: " + ev.location.zoomPassword + ". ";
+    }
   } else {
-    t += `Location: ${ev.location.name}. ${ev.location.address}. `;
+    t += "Location: " + ev.location.name + ". " + ev.location.address + ". ";
   }
-  t += `What to expect: ${ev.notes.replace(/\n/g,' ')}. `;
-  if (ev.weather) t += `Weather: ${ev.weather.temp}, ${ev.weather.description}. ${ev.weather.advice.replace(/[🌂☀️]/g,'')}`;
+  t += "What to expect: " + ev.notes + ". ";
+  if (ev.weather) t += "Weather: " + ev.weather.temp + ", " + ev.weather.description + ". " + ev.weather.advice;
   speak(t);
 }
 
-// ═══════════════════════════════════════════
-// HOME
-// ═══════════════════════════════════════════
 function renderHome() {
-  document.getElementById('today-date').textContent =
-    new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  document.getElementById("today-date").textContent =
+    new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
 
-  const list = document.getElementById('events-list');
-  list.innerHTML = EVENTS.map(ev => `
-    <div class="event-card" onclick="showDetail(${ev.id})">
-      <div class="event-type-bar" style="background:${ev.typeColor}"></div>
-      <div class="event-title">${ev.title}</div>
-      <div class="event-meta">
-        <div class="event-meta-row">📅 <strong>${dayLabel(ev.date)}</strong> — ${formatDate(ev.date)}</div>
-        <div class="event-meta-row">🕐 ${ev.time} &nbsp;·&nbsp; ${ev.duration}</div>
-        <div class="event-meta-row">${ev.online ? '💻 Online' : '📍 ' + ev.location.name}</div>
-      </div>
-      ${ev.alert ? `<div class="alert-chip">⚠️ Important notice</div>` : ''}
-      <span class="chevron">›</span>
-    </div>
-  `).join('');
+  var html = "";
+  EVENTS.forEach(function(ev) {
+    html += '<div class="event-card" onclick="showDetail(' + ev.id + ')">';
+    html += '<div class="event-type-bar" style="background:' + ev.typeColor + '"></div>';
+    html += '<div class="event-title">' + ev.title + "</div>";
+    html += '<div class="event-meta">';
+    html += '<div class="event-meta-row">📅 <strong>' + dayLabel(ev.date) + "</strong> — " + formatDate(ev.date) + "</div>";
+    html += '<div class="event-meta-row">🕐 ' + ev.time + " &nbsp;·&nbsp; " + ev.duration + "</div>";
+    html += '<div class="event-meta-row">' + (ev.online ? "💻 Online" : "📍 " + ev.location.name) + "</div>";
+    html += "</div>";
+    if (ev.alert) html += '<div class="alert-chip">⚠️ Important notice</div>';
+    html += '<span class="chevron">›</span>';
+    html += "</div>";
+  });
+  document.getElementById("events-list").innerHTML = html;
 }
 
-// ═══════════════════════════════════════════
-// DETAIL
-// ═══════════════════════════════════════════
 function showDetail(id) {
-  currentEvent = EVENTS.find(e => e.id === id);
-  const ev = currentEvent;
-  let html = '';
+  currentEvent = null;
+  for (var i = 0; i < EVENTS.length; i++) {
+    if (EVENTS[i].id === id) { currentEvent = EVENTS[i]; break; }
+  }
+  if (!currentEvent) return;
+  var ev = currentEvent;
+  var html = "";
 
-  // Alert
   if (ev.alert) {
-    html += `
-      <div class="alert-banner">
-        <div class="alert-title">${ev.alert.title}</div>
-        <div class="alert-msg">${ev.alert.message}</div>
-        <div class="alert-fix">${ev.alert.fix}</div>
-      </div>`;
+    html += '<div class="alert-banner">';
+    html += '<div class="alert-title">⚠️ ' + ev.alert.title + "</div>";
+    html += '<div class="alert-msg">' + ev.alert.message + "</div>";
+    html += '<div class="alert-fix">✅ ' + ev.alert.fix + "</div>";
+    html += "</div>";
   }
 
-  // Hero
-  html += `
-    <div class="detail-hero">
-      <div class="detail-title">${ev.title}</div>
-      <div class="pills">
-        <span class="pill">📅 ${formatDate(ev.date)}</span>
-        <span class="pill">🕐 ${ev.time}</span>
-        <span class="pill">${ev.duration}</span>
-      </div>
-    </div>`;
+  html += '<div class="detail-hero">';
+  html += '<div class="detail-title">' + ev.title + "</div>";
+  html += '<div class="pills">';
+  html += '<span class="pill">📅 ' + formatDate(ev.date) + "</span>";
+  html += '<span class="pill">🕐 ' + ev.time + "</span>";
+  html += '<span class="pill">' + ev.duration + "</span>";
+  html += "</div></div>";
 
-  // Location
   if (ev.online) {
-    html += `
-      <div class="card-section">
-        <div class="card-head">How to join
-          <button class="speak-btn-inline" onclick="speak('Join on Zoom. Meeting ID: ${ev.location.zoomId}. Password: ${ev.location.zoomPassword}.')">🔊</button>
-        </div>
-        <div class="card-body" style="text-align:center; padding-top:20px;">
-          <div style="font-size:48px; margin-bottom:10px;">💻</div>
-          <div style="font-size:20px; font-weight:800; margin-bottom:14px;">${ev.location.name}</div>
-          <div style="font-size:15px; color:var(--muted); margin-bottom:6px;">Meeting ID</div>
-          <div class="zoom-id">${ev.location.zoomId}</div>
-          <div style="font-size:16px; color:var(--muted); margin: 8px 0 18px;">Password: <strong>${ev.location.zoomPassword}</strong></div>
-          <a href="${ev.location.zoomLink}" target="_blank" class="btn-action btn-zoom">🎥 Open Zoom now</a>
-        </div>
-      </div>`;
+    html += '<div class="card-section"><div class="card-head">How to join</div><div class="card-body" style="text-align:center;padding-top:20px;">';
+    if (ev.isPhone) {
+      html += '<div style="font-size:52px;margin-bottom:12px;">📞</div>';
+      html += '<div style="font-size:20px;font-weight:800;margin-bottom:10px;">Your GP will call you</div>';
+      html += '<div style="font-size:17px;margin-bottom:6px;">Phone number</div>';
+      html += '<div class="zoom-id">' + ev.location.zoomId + "</div>";
+      html += '<div style="font-size:16px;color:var(--muted);margin:10px 0 18px;">Make sure your phone is charged and not on silent.</div>';
+      html += '<a href="' + ev.location.zoomLink + '" class="btn-action btn-call">📞 Call them back if needed</a>';
+    } else {
+      html += '<div style="font-size:52px;margin-bottom:12px;">💻</div>';
+      html += '<div style="font-size:20px;font-weight:800;margin-bottom:10px;">' + ev.location.name + "</div>";
+      html += '<div style="font-size:15px;color:var(--muted);margin-bottom:6px;">Meeting ID</div>';
+      html += '<div class="zoom-id">' + ev.location.zoomId + "</div>";
+      html += '<div style="font-size:16px;color:var(--muted);margin:8px 0 18px;">Password: <strong>' + ev.location.zoomPassword + "</strong></div>";
+      html += '<a href="' + ev.location.zoomLink + '" target="_blank" class="btn-action btn-zoom">🎥 Open Zoom now</a>';
+    }
+    html += "</div></div>";
   } else {
-    html += `
-      <div class="card-section">
-        <div class="card-head">Where to go
-          <button class="speak-btn-inline" onclick="speak('${ev.location.name}. ${ev.location.address}. ${ev.location.floor.replace(/📌/g,'')}')">🔊</button>
-        </div>
-        <div class="venue-photos">
-          ${ev.location.photos.map(p => `<img class="venue-photo" src="${p.url}" alt="${p.caption}" loading="lazy">`).join('')}
-        </div>
-        <div class="photo-caption">Swipe to see more photos →</div>
-        <div class="card-body" style="padding-top:10px;">
-          <div class="loc-name">${ev.location.name}</div>
-          <div class="loc-address">${ev.location.address}</div>
-          <div class="loc-floor">${ev.location.floor}</div>
-        </div>
-      </div>`;
+    html += '<div class="card-section"><div class="card-head">Where to go</div>';
+    html += '<div class="venue-photos">';
+    ev.location.photos.forEach(function(p) {
+      html += '<img class="venue-photo" src="' + p.url + '" alt="' + p.caption + '" loading="lazy">';
+    });
+    html += "</div>";
+    html += '<div class="photo-caption">Swipe to see more photos →</div>';
+    html += '<div class="card-body" style="padding-top:10px;">';
+    html += '<div class="loc-name">' + ev.location.name + "</div>";
+    html += '<div class="loc-address">' + ev.location.address + "</div>";
+    html += '<div class="loc-floor">📌 ' + ev.location.floor + "</div>";
+    html += "</div></div>";
 
-    // Travel
-    html += `
-      <div class="card-section">
-        <div class="card-head">How to get there
-          <button class="speak-btn-inline" onclick="speakTransport()">🔊</button>
-        </div>
-        <div class="card-body">
-          <div class="transport-toggle">
-            <button class="t-btn active" id="btn-pub" onclick="setTransport('pub')">
-              <span class="ti">🚌</span>Public Transport
-            </button>
-            <button class="t-btn" id="btn-priv" onclick="setTransport('priv')">
-              <span class="ti">🚗</span>Personal / Uber
-            </button>
-          </div>
+    html += '<div class="card-section"><div class="card-head">How to get there</div><div class="card-body">';
+    html += '<div class="transport-toggle">';
+    html += '<button class="t-btn active" id="btn-pub" onclick="setTransport(\'pub\')"><span class="ti">🚌</span>Public Transport</button>';
+    html += '<button class="t-btn" id="btn-priv" onclick="setTransport(\'priv\')"><span class="ti">🚗</span>Personal / Uber</button>';
+    html += "</div>";
 
-          <div class="t-panel active" id="panel-pub">
-            ${ev.location.publicRoutes.map((r, ri) => `
-              <div class="route-group">
-                <div class="route-label">${r.icon} ${r.label}</div>
-                ${r.steps.map((s, i) => `
-                  <div class="route-step">
-                    <div class="step-num">${i+1}</div>
-                    <div class="step-text">${s}</div>
-                  </div>`).join('')}
-              </div>
-              ${ri < ev.location.publicRoutes.length - 1 ? '<hr class="route-divider">' : ''}
-            `).join('')}
-          </div>
+    html += '<div class="t-panel active" id="panel-pub">';
+    ev.location.publicRoutes.forEach(function(r, ri) {
+      html += '<div class="route-group">';
+      html += '<div class="route-label">' + r.icon + " " + r.label + "</div>";
+      r.steps.forEach(function(s, i) {
+        html += '<div class="route-step"><div class="step-num">' + (i+1) + '</div><div class="step-text">' + s + "</div></div>";
+      });
+      html += "</div>";
+      if (ri < ev.location.publicRoutes.length - 1) html += '<hr class="route-divider">';
+    });
+    html += "</div>";
 
-          <div class="t-panel" id="panel-priv">
-            ${ev.location.privateRoutes.map((r, ri) => `
-              <div class="route-group">
-                <div class="route-label">${r.icon} ${r.label}</div>
-                ${r.steps.map((s, i) => `
-                  <div class="route-step">
-                    <div class="step-num">${i+1}</div>
-                    <div class="step-text">${s}</div>
-                  </div>`).join('')}
-              </div>
-              ${ri < ev.location.privateRoutes.length - 1 ? '<hr class="route-divider">' : ''}
-            `).join('')}
-            <div style="margin-top:18px;">
-              <a href="${ev.location.googleMaps}" target="_blank" class="btn-action btn-maps">🗺️ Open in Google Maps</a>
-              <a href="${ev.location.uber}" target="_blank" class="btn-action btn-uber">🚕 Book an Uber</a>
-            </div>
-          </div>
-        </div>
-      </div>`;
+    html += '<div class="t-panel" id="panel-priv">';
+    ev.location.privateRoutes.forEach(function(r, ri) {
+      html += '<div class="route-group">';
+      html += '<div class="route-label">' + r.icon + " " + r.label + "</div>";
+      r.steps.forEach(function(s, i) {
+        html += '<div class="route-step"><div class="step-num">' + (i+1) + '</div><div class="step-text">' + s + "</div></div>";
+      });
+      html += "</div>";
+      if (ri < ev.location.privateRoutes.length - 1) html += '<hr class="route-divider">';
+    });
+    html += '<div style="margin-top:18px;">';
+    html += '<a href="' + ev.location.googleMaps + '" target="_blank" class="btn-action btn-maps">🗺️ Open in Google Maps</a>';
+    html += '<a href="' + ev.location.uber + '" target="_blank" class="btn-action btn-uber">🚕 Book an Uber</a>';
+    html += "</div></div>";
+    html += "</div></div>";
   }
 
-  // Weather
   if (ev.weather) {
-    html += `
-      <div class="card-section">
-        <div class="card-head">Weather on the day
-          <button class="speak-btn-inline" onclick="speak('${ev.weather.temp}, ${ev.weather.description}. ${ev.weather.advice.replace(/[🌂☀️⛅]/g,'')}')">🔊</button>
-        </div>
-        <div class="card-body">
-          <div class="wx-row">
-            <div class="wx-icon">${ev.weather.icon}</div>
-            <div>
-              <div class="wx-temp">${ev.weather.temp}</div>
-              <div class="wx-desc">${ev.weather.description}</div>
-            </div>
-          </div>
-          <div class="wx-tip">${ev.weather.advice}</div>
-        </div>
-      </div>`;
+    html += '<div class="card-section"><div class="card-head">Weather on the day</div><div class="card-body">';
+    html += '<div class="wx-row"><div class="wx-icon">' + ev.weather.icon + "</div><div>";
+    html += '<div class="wx-temp">' + ev.weather.temp + "</div>";
+    html += '<div class="wx-desc">' + ev.weather.description + "</div>";
+    html += "</div></div>";
+    html += '<div class="wx-tip">💡 ' + ev.weather.advice + "</div>";
+    html += "</div></div>";
   }
 
-  // Notes
-  html += `
-    <div class="card-section">
-      <div class="card-head">What to expect
-        <button class="speak-btn-inline" onclick="speak('${ev.notes.replace(/'/g,''').replace(/\n/g,' ')}')">🔊</button>
-      </div>
-      <div class="card-body">
-        <div class="notes-text">${ev.notes.replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>')}</div>
-      </div>
-    </div>`;
+  html += '<div class="card-section"><div class="card-head">What to expect</div><div class="card-body">';
+  html += '<div class="notes-text">' + ev.notes + "</div>";
+  html += "</div></div>";
 
-  // Contact
-  html += `
-    <div class="card-section">
-      <div class="card-head">Contact</div>
-      <div class="card-body">
-        <div class="contact-row">
-          <span style="font-size:28px;">👤</span>
-          <div class="contact-info">
-            <div class="name">${ev.contact.name}</div>
-            <div class="detail">${ev.contact.detail}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div style="height:20px;"></div>`;
+  html += '<div class="card-section"><div class="card-head">Contact</div><div class="card-body">';
+  html += '<div class="contact-row"><span style="font-size:28px;">👤</span><div>';
+  html += '<div style="font-weight:800;">' + ev.contact.name + "</div>";
+  html += '<div style="color:var(--muted);font-size:16px;">' + ev.contact.detail + "</div>";
+  html += "</div></div></div></div>";
+  html += '<div style="height:20px;"></div>';
 
-  document.getElementById('detail-content').innerHTML = html;
+  document.getElementById("detail-content").innerHTML = html;
+  document.getElementById("detail-speak-btn").onclick = speakDetail;
 
-  // Sticky add to calendar
-  document.getElementById('sticky-cal').innerHTML = `
-    <a onclick="addGCal()" class="btn-action btn-gcal" style="margin-bottom:8px; cursor:pointer;">📅 Add to Google Calendar</a>
-    <a onclick="downloadICS()" class="btn-action btn-ics" style="margin-bottom:0; cursor:pointer;">📥 Download calendar file (.ics)</a>
-  `;
+  document.getElementById("sticky-cal").innerHTML =
+    '<button class="btn-action btn-gcal" onclick="addGCal()" style="margin-bottom:8px;">📅 Add to Google Calendar</button>' +
+    '<button class="btn-action btn-ics" onclick="downloadICS()" style="margin-bottom:0;">📥 Download calendar file</button>';
 
-  document.getElementById('detail-speak-btn').onclick = () => speakDetail(ev);
-
-  showScreen('screen-detail');
+  showScreen("screen-detail");
   window.scrollTo(0, 0);
 }
 
 function setTransport(type) {
-  ['pub','priv'].forEach(t => {
-    document.getElementById('btn-'+t).classList.toggle('active', t === type);
-    document.getElementById('panel-'+t).classList.toggle('active', t === type);
-  });
+  document.getElementById("btn-pub").classList.toggle("active", type === "pub");
+  document.getElementById("btn-priv").classList.toggle("active", type === "priv");
+  document.getElementById("panel-pub").classList.toggle("active", type === "pub");
+  document.getElementById("panel-priv").classList.toggle("active", type === "priv");
 }
 
-function speakTransport() {
-  if (!currentEvent || currentEvent.online) return;
-  const r = currentEvent.location.publicRoutes[0];
-  speak('Public transport. ' + r.label + '. ' + r.steps.join('. '));
-}
-
-// ═══════════════════════════════════════════
-// CALENDAR
-// ═══════════════════════════════════════════
 function addGCal() {
-  const ev = currentEvent;
-  const ds = ev.date.replace(/-/g,'');
-  const ts = ev.time.replace(':','') + '00';
-  const te = ev.endTime.replace(':','') + '00';
-  const loc = ev.online ? 'Online - Zoom' : ev.location.address;
-  const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(ev.title)}&dates=${ds}T${ts}/${ds}T${te}&details=${encodeURIComponent(ev.notes)}&location=${encodeURIComponent(loc)}`;
-  window.open(url, '_blank');
+  var ev = currentEvent;
+  var ds = ev.date.replace(/-/g, "");
+  var ts = ev.time.replace(":", "") + "00";
+  var te = ev.endTime.replace(":", "") + "00";
+  var loc = ev.online ? "Online" : ev.location.address;
+  var url = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(ev.title) +
+    "&dates=" + ds + "T" + ts + "/" + ds + "T" + te +
+    "&details=" + encodeURIComponent(ev.notes) +
+    "&location=" + encodeURIComponent(loc);
+  window.open(url, "_blank");
 }
 
 function downloadICS() {
-  const ev = currentEvent;
-  const ds = ev.date.replace(/-/g,'');
-  const ts = ev.time.replace(':','') + '00';
-  const te = ev.endTime.replace(':','') + '00';
-  const loc = ev.online ? 'Online - Zoom' : ev.location.address;
-  const ics = [
-    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Heart n Soul//EN',
-    'BEGIN:VEVENT',
-    `DTSTART:${ds}T${ts}`,
-    `DTEND:${ds}T${te}`,
-    `SUMMARY:${ev.title}`,
-    `LOCATION:${loc}`,
-    `DESCRIPTION:${ev.notes.replace(/\n/g,'\\n')}`,
-    'END:VEVENT', 'END:VCALENDAR'
-  ].join('\r\n');
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
-  a.download = ev.title.replace(/\s+/g,'_') + '.ics';
+  var ev = currentEvent;
+  var ds = ev.date.replace(/-/g, "");
+  var ts = ev.time.replace(":", "") + "00";
+  var te = ev.endTime.replace(":", "") + "00";
+  var loc = ev.online ? "Online" : ev.location.address;
+  var ics = "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Heart n Soul//EN\r\nBEGIN:VEVENT\r\n" +
+    "DTSTART:" + ds + "T" + ts + "\r\n" +
+    "DTEND:" + ds + "T" + te + "\r\n" +
+    "SUMMARY:" + ev.title + "\r\n" +
+    "LOCATION:" + loc + "\r\n" +
+    "DESCRIPTION:" + ev.notes + "\r\n" +
+    "END:VEVENT\r\nEND:VCALENDAR";
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
+  a.download = ev.title.replace(/\s+/g, "_") + ".ics";
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
 
-// ═══════════════════════════════════════════
-// NAV
-// ═══════════════════════════════════════════
 function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  document.querySelectorAll(".screen").forEach(function(s) { s.classList.remove("active"); });
+  document.getElementById(id).classList.add("active");
 }
+
 function showHome() {
-  window.speechSynthesis && window.speechSynthesis.cancel();
-  showScreen('screen-home');
-  window.scrollTo(0,0);
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  showScreen("screen-home");
+  window.scrollTo(0, 0);
 }
 
 renderHome();
