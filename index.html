@@ -491,6 +491,175 @@ const EVENTS = [
   },
   {
     id: 3,
+    title: "Dentist Check-up",
+    date: "2026-07-07",
+    time: "11:30",
+    endTime: "12:00",
+    duration: "30 minutes",
+    type: "medical",
+    typeColor: "#16a085",
+    online: false,
+    location: {
+      name: "Smile Dental Practice",
+      address: "42 High Street, London SE1 1JN",
+      floor: "📌 Go through the main door and sign in at the front desk. Tell them your name and they will call you when the dentist is ready.",
+      photos: [
+        { url: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=600&q=80", caption: "Smile Dental Practice — front entrance" },
+        { url: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=80", caption: "Inside the waiting room" }
+      ],
+      googleMaps: "https://maps.google.com/?q=42+High+Street+London+SE1+1JN",
+      uber: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=42%20High%20Street%2C%20London%20SE1%201JN&dropoff[nickname]=Smile%20Dental%20Practice",
+      publicRoutes: [
+        {
+          icon: "🚇",
+          label: "Tube — London Bridge",
+          steps: [
+            "Take the Jubilee or Northern line",
+            "Get off at London Bridge station",
+            "Walk 4 minutes down Borough High Street"
+          ]
+        },
+        {
+          icon: "🚌",
+          label: "Bus",
+          steps: [
+            "Take bus 21, 35 or 40",
+            "Get off at London Bridge stop",
+            "Walk 2 minutes to High Street"
+          ]
+        }
+      ],
+      privateRoutes: [
+        {
+          icon: "🚗",
+          label: "Drive",
+          steps: [
+            "Head towards London Bridge",
+            "Postcode for sat nav: SE1 1JN",
+            "Street parking available on side roads nearby"
+          ]
+        },
+        {
+          icon: "🚕",
+          label: "Uber",
+          steps: [
+            "Tap the Uber button below",
+            "The app will take you straight to Smile Dental Practice"
+          ]
+        }
+      ]
+    },
+    contact: { name: "Smile Dental Reception", detail: "020 7654 3210" },
+    notes: "This is a routine check-up — just a quick look at your teeth. No needles unless the dentist finds something that needs fixing, and they will always ask you first.\n\nPlease arrive 5 minutes early to fill in a short form at the front desk.",
+    alert: {
+      title: "⚠️ Remember to bring ID",
+      message: "The practice needs to see a photo ID for new patients.",
+      fix: "✅ Bring your bus pass, driving licence, or passport. Any one of these is fine."
+    },
+    weather: {
+      temp: "20°C",
+      description: "Sunny intervals",
+      advice: "☀️ Nice day — no need for a coat.",
+      icon: "🌤️"
+    }
+  },
+  {
+    id: 4,
+    title: "Job Skills Workshop",
+    date: "2026-07-08",
+    time: "10:00",
+    endTime: "12:30",
+    duration: "2.5 hours",
+    type: "conference",
+    typeColor: "#e67e22",
+    online: false,
+    location: {
+      name: "Southwark JobCentre Plus",
+      address: "Lee House, 109 Borough High St, London SE1 1NL",
+      floor: "📌 Go to the second floor. Ask the security guard at the front desk — they will point you to Room 2B.",
+      photos: [
+        { url: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80", caption: "Southwark JobCentre Plus — front of the building" },
+        { url: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80", caption: "The training room inside" }
+      ],
+      googleMaps: "https://maps.google.com/?q=109+Borough+High+Street+London+SE1+1NL",
+      uber: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=109%20Borough%20High%20St%2C%20London%20SE1%201NL&dropoff[nickname]=Southwark%20JobCentre",
+      publicRoutes: [
+        {
+          icon: "🚇",
+          label: "Tube — Borough Station",
+          steps: [
+            "Take the Northern line",
+            "Get off at Borough station",
+            "Walk 3 minutes up Borough High Street"
+          ]
+        },
+        {
+          icon: "🚌",
+          label: "Bus",
+          steps: [
+            "Take bus 21, 35 or 133",
+            "Get off at Borough High Street stop",
+            "The building is right there"
+          ]
+        }
+      ],
+      privateRoutes: [
+        {
+          icon: "🚗",
+          label: "Drive",
+          steps: [
+            "Head towards Borough High Street",
+            "Postcode for sat nav: SE1 1NL",
+            "Parking is available at Snowfields car park, 5 minutes walk"
+          ]
+        },
+        {
+          icon: "🚕",
+          label: "Uber",
+          steps: [
+            "Tap the Uber button below",
+            "Drop-off is right outside the building"
+          ]
+        }
+      ]
+    },
+    contact: { name: "Marcus Johnson — Workshop Lead", detail: "020 7407 1234" },
+    notes: "This workshop will help you practise writing a CV and talking about yourself in interviews. You do not need to prepare anything — just come along.\n\nTea, coffee and biscuits will be provided. The session is relaxed and friendly.",
+    alert: null,
+    weather: {
+      temp: "18°C",
+      description: "Cloudy but dry",
+      advice: "🧥 Bring a light jacket just in case.",
+      icon: "🌥️"
+    }
+  },
+  {
+    id: 5,
+    title: "GP Follow-up",
+    date: "2026-07-10",
+    time: "09:00",
+    endTime: "09:20",
+    duration: "20 minutes",
+    type: "medical",
+    typeColor: "#e74c3c",
+    online: true,
+    location: {
+      name: "Online — Phone call with your GP",
+      zoomLink: "tel:02071234567",
+      zoomId: "020 7123 4567",
+      zoomPassword: "n/a"
+    },
+    contact: { name: "Dr Ahmed — Borough Road Surgery", detail: "020 7123 4567" },
+    notes: "Your GP will call you on your mobile at 9am. Make sure your phone is charged and the sound is turned up the night before.\n\nThe call will take about 20 minutes. You can be at home — no need to go anywhere.",
+    alert: {
+      title: "⚠️ Your GP will call you",
+      message: "This appointment is a phone call — your doctor will ring you at 9am.",
+      fix: "✅ Make sure your phone is on, charged, and not on silent the night before."
+    },
+    weather: null
+  },
+  {
+    id: 7,
     title: "Community Conference",
     date: "2026-07-03",
     time: "09:30",
